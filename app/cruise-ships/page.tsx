@@ -1,1 +1,5 @@
-export { metadata, default } from "@/app/cruise-lines/page";
+import { redirect } from "next/navigation";
+
+export default function CruiseShipsPage() {
+  redirect("/cruise-lines");
+}

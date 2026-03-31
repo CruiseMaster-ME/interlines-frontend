@@ -17,11 +17,11 @@ export default function BrandMark({
 
   const mark = (
     <span className="inline-flex flex-col items-start text-left leading-none">
-      <span className={cn("mb-2 h-px w-8", accentTone)} />
+      <span className={cn("mb-1.5 h-px w-6 sm:mb-2 sm:w-8", accentTone)} />
       <span className="inline-flex flex-col items-start text-left leading-none">
         <span
           className={cn(
-            "font-brand text-[0.7rem] font-semibold uppercase tracking-[0.3em] sm:text-[0.9rem]",
+            "font-brand text-[0.64rem] font-semibold uppercase tracking-[0.24em] sm:text-[0.9rem] sm:tracking-[0.3em]",
             topTone,
           )}
         >
@@ -29,7 +29,7 @@ export default function BrandMark({
         </span>
         <span
           className={cn(
-            "mt-1.5 text-[0.66rem] font-bold uppercase tracking-[0.26em] sm:text-[0.78rem]",
+            "mt-1 text-[0.58rem] font-bold uppercase tracking-[0.22em] sm:mt-1.5 sm:text-[0.78rem] sm:tracking-[0.26em]",
             bottomTone,
           )}
         >

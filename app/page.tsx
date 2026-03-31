@@ -29,10 +29,7 @@ const homeImages = {
 
 import {
   SectionTitle,
-  CheckList,
   Pill,
-  Card,
-  Divider,
 } from "@/components/PremiumUI";
 
 export default function HomePage() {
@@ -41,13 +38,13 @@ export default function HomePage() {
   return (
     <div className="bg-[var(--interlines-bg)] text-[var(--interlines-slate-soft)] selection:bg-[var(--interlines-azure)]/20 selection:text-[var(--interlines-azure-deep)] w-full overflow-hidden">
       {/* Hero Section */}
-      <section className="relative isolate flex h-[100svh] min-h-[100svh] items-center overflow-hidden pt-20">
+      <section className="relative isolate flex h-[100svh] min-h-[100svh] items-center overflow-hidden pt-16 sm:pt-20">
         <div className="absolute inset-0 z-0 bg-[var(--interlines-azure-deep)]">
           <img
             src={homeImages.hero}
             alt=""
             aria-hidden="true"
-            className="h-full w-full object-cover object-[68%_60%] opacity-[0.72] scale-105 lg:object-[center_60%]"
+            className="h-full w-full object-cover object-[72%_60%] opacity-[0.72] scale-105 sm:object-[68%_60%] lg:object-[center_60%]"
             style={{ animation: "interlines-float 30s ease-out infinite" }}
           />
           <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(36,88,96,0.9)_0%,rgba(48,117,128,0.72)_34%,rgba(36,88,96,0.24)_62%,rgba(36,88,96,0.08)_100%)]" />
@@ -55,22 +52,22 @@ export default function HomePage() {
           <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-[var(--interlines-azure-deep)]/92 via-[var(--interlines-azure)]/52 to-transparent sm:w-[82%] lg:w-[50%]" />
         </div>
         
-        <div className="home-glow absolute left-[-8%] top-[12%] h-[480px] w-[480px] rounded-full bg-[var(--interlines-azure)]/18 blur-[120px] z-0 pointer-events-none" />
-        <div className="home-glow absolute right-[-6%] bottom-[-4%] h-[420px] w-[420px] rounded-full bg-[var(--interlines-gold)]/12 blur-[110px] z-0 pointer-events-none" style={{ animationDelay: '2s' }} />
+        <div className="home-glow absolute left-[-12%] top-[16%] h-[280px] w-[280px] rounded-full bg-[var(--interlines-azure)]/18 blur-[90px] z-0 pointer-events-none sm:left-[-8%] sm:top-[12%] sm:h-[480px] sm:w-[480px] sm:blur-[120px]" />
+        <div className="home-glow absolute right-[-10%] bottom-[2%] h-[240px] w-[240px] rounded-full bg-[var(--interlines-gold)]/12 blur-[85px] z-0 pointer-events-none sm:right-[-6%] sm:bottom-[-4%] sm:h-[420px] sm:w-[420px] sm:blur-[110px]" style={{ animationDelay: '2s' }} />
 
-        <Container className="relative z-10 px-5 w-full pt-10 pb-24 sm:pt-20 sm:pb-32">
-          <div className="home-reveal max-w-2xl" style={{ animationDelay: "200ms" }}>
-            <h1 className="font-display text-[4rem] leading-[1.05] tracking-[-0.02em] text-white sm:text-[6rem] lg:text-[7rem] drop-shadow-[0_8px_40px_rgba(16,24,40,0.22)]">
+        <Container className="relative z-10 w-full px-5 pt-6 pb-24 sm:pt-20 sm:pb-32">
+          <div className="home-reveal max-w-xl sm:max-w-2xl" style={{ animationDelay: "200ms" }}>
+            <h1 className="font-display text-[2.9rem] leading-[1.02] tracking-[-0.03em] text-white sm:text-[5.2rem] lg:text-[7rem] drop-shadow-[0_8px_40px_rgba(16,24,40,0.22)]">
               Set Sail. This Time,
-              <span className="block text-[var(--interlines-gold-light)] italic pr-4">
+              <span className="block pr-1 text-[var(--interlines-gold-light)] italic sm:pr-4">
                 It&apos;s Your Turn.
               </span>
             </h1>
-            <p className="mt-8 max-w-2xl text-lg font-medium leading-relaxed text-white/90 sm:text-xl">
+            <p className="mt-6 max-w-[22rem] text-base font-medium leading-relaxed text-white/90 sm:mt-8 sm:max-w-2xl sm:text-xl">
               Exclusive cruise rates for Middle East travel professionals.
             </p>
-            <div className="mt-12 flex flex-wrap gap-4">
-              <Pill href="/offers" variant="white">
+            <div className="mt-10 flex flex-wrap gap-4 sm:mt-12">
+              <Pill href="/offers" variant="white" className="w-full sm:w-auto">
                 Explore Cruise Offers
               </Pill>
             </div>
@@ -79,16 +76,13 @@ export default function HomePage() {
 
         <a
           href="#home-introduction"
-          className="absolute bottom-7 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-3 text-white/80 transition-colors duration-300 hover:text-white"
+          className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2.5 text-white/80 transition-colors duration-300 hover:text-white sm:bottom-7 sm:gap-3"
           aria-label="Scroll to introduction"
         >
-          <span className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/18 bg-white/6 shadow-[0_12px_30px_rgba(16,24,40,0.18)] backdrop-blur-md">
+          <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/18 bg-white/6 shadow-[0_12px_30px_rgba(16,24,40,0.18)] backdrop-blur-md sm:h-14 sm:w-14">
             <Mouse className="h-5 w-5 animate-bounce" strokeWidth={1.8} />
           </span>
-          <span className="text-[10px] font-bold uppercase tracking-[0.34em] text-[var(--interlines-gold-light)]">
-            Scroll
-          </span>
-          <span className="h-10 w-px bg-gradient-to-b from-white/55 to-transparent" />
+          <span className="h-8 w-px bg-gradient-to-b from-white/55 to-transparent sm:h-10" />
         </a>
       </section>
 
@@ -98,23 +92,123 @@ export default function HomePage() {
         className="relative z-20 pt-16 pb-20 sm:pt-20 sm:pb-24"
       >
         <Container className="px-5">
-          <div className="grid items-stretch gap-8 lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="group relative min-h-[320px] overflow-hidden rounded-[2.5rem] border border-[var(--interlines-azure)]/10 shadow-[0_18px_55px_rgba(48,117,128,0.1)] sm:min-h-[420px]">
+          <div className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+            <div className="order-2 group relative min-h-[250px] overflow-hidden rounded-[2rem_0_2rem_0] shadow-[0_24px_65px_rgba(48,117,128,0.12)] sm:min-h-[360px] sm:rounded-[2.4rem_0_2.4rem_0] lg:order-1 lg:min-h-[460px] lg:rounded-[2.75rem_0_2.75rem_0]">
               <img
                 src={homeImages.intro}
                 alt="Cruise experience for travel professionals"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--interlines-azure-deep)]/52 via-[var(--interlines-azure)]/10 to-transparent" />
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/18" />
             </div>
 
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-[var(--interlines-azure)]/10 bg-white p-10 shadow-[0_15px_50px_rgba(48,117,128,0.06)] sm:p-14">
-              <div className="absolute inset-0 bg-gradient-to-br from-[var(--interlines-azure-light)]/50 to-transparent" />
+            <div className="order-1 relative max-w-xl lg:order-2 lg:pl-4">
+              <div className="mb-6 h-px w-14 bg-gradient-to-r from-[var(--interlines-gold)] to-transparent sm:mb-8 sm:w-16" />
+              <SectionTitle>{introductionHeading}</SectionTitle>
+              <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)] sm:mt-8 sm:space-y-6 sm:text-[17px]">
+                {introductionBody.map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Who We Are */}
+      <section className="relative overflow-hidden border-y border-[var(--interlines-azure)]/10 bg-white/65 py-16 sm:py-24">
+        <div className="pointer-events-none absolute right-[-8%] top-1/2 h-[36rem] w-[36rem] -translate-y-1/2 rounded-full bg-[var(--interlines-azure)]/8 blur-[150px]" />
+
+        <Container className="relative z-10 grid gap-10 px-5 lg:grid-cols-[0.98fr_1.02fr] lg:items-center lg:gap-14">
+          <div className="order-2 relative min-h-[280px] overflow-hidden rounded-[0_2rem_0_2rem] shadow-[0_24px_70px_rgba(48,117,128,0.12)] sm:min-h-[380px] sm:rounded-[0_2.5rem_0_2.5rem] lg:order-1 lg:min-h-[460px] lg:rounded-[0_3rem_0_3rem]">
+            <img
+              src={homeImages.how}
+              alt="Travel professional on a cruise"
+              className="absolute inset-0 h-full w-full object-cover object-[center_28%] opacity-95"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--interlines-azure-deep)]/70 via-[var(--interlines-azure)]/12 to-transparent" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/16" />
+          </div>
+
+          <div className="order-1 max-w-xl lg:order-2 lg:pr-6">
+            <SectionTitle>Who We Are</SectionTitle>
+            <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)] sm:mt-8 sm:space-y-6 sm:text-[17px]">
+              {whoWeAreParagraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+
+            <div className="mt-10 sm:mt-12">
+              <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--interlines-slate)] sm:mb-6 sm:text-xs sm:tracking-[0.2em]">
+                As a registered member, you can:
+              </p>
+              <div className="border-y border-[var(--interlines-azure)]/10">
+                {whoWeAreMemberActions.map((item, index) => (
+                  <div
+                    key={item}
+                    className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
+                      index !== 0 ? "border-t border-[var(--interlines-azure)]/10" : ""
+                    }`}
+                  >
+                    <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/70 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Why Choose Us & Benefits */}
+      <section className="relative py-16 sm:py-24">
+        <Container className="relative px-5 z-10">
+          <div className="grid overflow-hidden rounded-[2rem_0_2rem_0] border border-[var(--interlines-azure)]/10 sm:rounded-[2.4rem_0_2.4rem_0] lg:grid-cols-[1fr_1fr] lg:rounded-[3rem_0_3rem_0]">
+            <div className="bg-[linear-gradient(180deg,rgba(248,251,252,0.98),rgba(255,255,255,1))] px-5 py-8 sm:px-12 sm:py-14">
+              <SectionTitle>Why Choose Us</SectionTitle>
+              <div className="mt-7 border-t border-[var(--interlines-azure)]/10 sm:mt-10">
+                {whyChooseUs.map((item, index) => (
+                  <div
+                    key={item}
+                    className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
+                      index !== 0 ? "border-t border-[var(--interlines-azure)]/10" : ""
+                    }`}
+                  >
+                    <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/75 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden bg-[linear-gradient(160deg,rgba(36,88,96,1)_0%,rgba(48,117,128,0.96)_70%,rgba(64,145,156,0.92)_100%)] px-5 py-8 sm:px-12 sm:py-14">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_38%)]" />
               <div className="relative z-10">
-                <SectionTitle>{introductionHeading}</SectionTitle>
-                <div className="mt-8 space-y-6 text-[17px] leading-relaxed text-[var(--interlines-slate-soft)]">
-                  {introductionBody.map((item) => (
-                    <p key={item}>{item}</p>
+                <SectionTitle invert>Benefits for Travel Industry Professionals</SectionTitle>
+                <div className="mt-7 border-t border-white/12 sm:mt-10">
+                  {memberBenefits.map((item, index) => (
+                    <div
+                      key={item}
+                      className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
+                        index !== 0 ? "border-t border-white/12" : ""
+                      }`}
+                    >
+                      <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-gold-light)]/90 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <p className="text-[14px] leading-relaxed text-white/88 sm:text-[15px]">
+                        {item}
+                      </p>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -123,182 +217,154 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <Divider />
-
-      {/* Who We Are */}
-      <section className="relative overflow-hidden py-20 sm:py-24">
-        <div className="absolute right-0 top-1/2 w-[600px] h-[600px] bg-[var(--interlines-azure)]/5 rounded-full blur-[150px] -translate-y-1/2 pointer-events-none" />
-        
-        <Container className="relative grid gap-12 px-5 lg:grid-cols-[1fr_1.2fr] z-10">
-          <div className="relative min-h-[500px] overflow-hidden rounded-[2.5rem] group shadow-[0_20px_60px_rgba(48,117,128,0.1)] border border-[var(--interlines-azure)]/5">
-            <div className="absolute inset-0 bg-[var(--interlines-azure)]/10 mix-blend-overlay z-10" />
-            <img
-              src={homeImages.how}
-              alt="Travel professional on a cruise"
-              className="absolute inset-0 h-full w-full object-cover object-[center_28%] transition-transform duration-[1.5s] group-hover:scale-105 opacity-90 mix-blend-luminosity"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
-          </div>
-
-          <div className="flex flex-col justify-center lg:pl-10">
-            <SectionTitle>Who We Are</SectionTitle>
-            <div className="mt-8 space-y-6 text-[17px] leading-relaxed text-[var(--interlines-slate-soft)]">
-              {whoWeAreParagraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-            <div className="mt-12 bg-white shadow-sm p-8 sm:p-10 rounded-[2rem] border border-[var(--interlines-azure)]/10 transition-colors duration-500 hover:border-[var(--interlines-azure)]/30">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--interlines-slate)] mb-6">
-                As a registered member, you can:
-              </p>
-              <CheckList items={whoWeAreMemberActions} />
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <Divider />
-
-      {/* Why Choose Us & Benefits */}
-      <section className="relative py-20 sm:py-24">
-        <Container className="relative px-5 z-10">
-          <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8">
-            <Card className="hover:border-[var(--interlines-azure)]/30 transition-colors duration-500 group">
-              <div className="absolute top-0 right-0 p-10 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500 pointer-events-none">
-                <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" className="text-[var(--interlines-azure)]"><path d="M12 2L2 22h20L12 2z"/></svg>
-              </div>
-              <SectionTitle>Why Choose Us</SectionTitle>
-              <div className="mt-10 relative z-10 h-full">
-                <CheckList items={whyChooseUs} />
-              </div>
-            </Card>
-
-            <Card invert className="relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative z-10 h-full">
-                <SectionTitle invert>Benefits for Travel Industry Professionals</SectionTitle>
-                <div className="mt-10">
-                  <CheckList invert items={memberBenefits} />
-                </div>
-              </div>
-            </Card>
-          </div>
-        </Container>
-      </section>
-
       {/* How it Works */}
-      <section className="relative overflow-hidden py-20 sm:py-24">
-        <div className="absolute top-0 left-0 w-full h-full bg-[var(--interlines-azure-light)]/40 border-y border-[var(--interlines-azure)]/10" />
+      <section className="relative overflow-hidden py-16 sm:py-24">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(232,242,244,0.6)_0%,rgba(250,250,250,0)_100%)]" />
         <Container className="relative px-5 z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
             <SectionTitle align="center">How the Programme Works</SectionTitle>
           </div>
-          
-          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-5 relative">
-            <div className="hidden xl:block absolute top-[50px] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[var(--interlines-azure)]/20 to-transparent z-0" />
-            
-            {programmeSteps.map((step, index) => (
-              <article
-                key={step}
-                className="bg-white relative rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-2 group overflow-hidden border border-[var(--interlines-azure)]/5 hover:border-[var(--interlines-azure)]/20 hover:shadow-[0_15px_40px_rgba(48,117,128,0.08)] z-10"
-              >
-                <div className="mb-6 h-12 w-12 rounded-full border border-[var(--interlines-azure)]/20 flex items-center justify-center bg-white group-hover:bg-[var(--interlines-azure)] transition-colors duration-500 shadow-sm">
-                  <span className="text-[1.15rem] font-semibold tabular-nums text-[var(--interlines-azure)] group-hover:text-white transition-colors duration-500">
-                    {index + 1}
+
+          <div className="border-y border-[var(--interlines-azure)]/12">
+            <div className="grid gap-px bg-[var(--interlines-azure)]/10 sm:grid-cols-2 xl:grid-cols-5">
+              {programmeSteps.map((step, index) => (
+                <article
+                  key={step}
+                  className="flex items-start gap-4 bg-[var(--interlines-bg)]/90 px-5 py-6 backdrop-blur-sm sm:px-7 sm:py-8 xl:block xl:px-7 xl:py-10"
+                >
+                  <span className="block text-[1.8rem] font-semibold leading-none tabular-nums text-[var(--interlines-azure)] sm:text-[2.25rem] xl:text-[3rem]">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
-                </div>
-                <p className="text-[15px] leading-relaxed text-[var(--interlines-slate-soft)] group-hover:text-[var(--interlines-slate)] transition-colors duration-300 relative z-10">
-                  {step}
-                </p>
-              </article>
-            ))}
+                  <p className="mt-0.5 max-w-none text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px] xl:mt-6 xl:max-w-[22ch]">
+                    {step}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
 
       {/* Eligibility & Offers */}
-      <section className="relative py-20 sm:py-24">
-        <Container className="flex flex-col gap-10 px-5">
-          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 items-stretch h-full">
-            <Card invert className="flex flex-col justify-start">
-              <SectionTitle invert>Who Is Eligible</SectionTitle>
-              <p className="mt-8 text-[17px] leading-relaxed text-white/90">
+      <section className="relative py-16 sm:py-24">
+        <Container className="px-5">
+          <div className="grid gap-10 xl:grid-cols-[0.92fr_1.08fr] xl:items-start xl:gap-14">
+            <div className="max-w-xl">
+              <div className="mb-6 h-px w-14 bg-gradient-to-r from-[var(--interlines-azure)] to-transparent sm:mb-8 sm:w-16" />
+              <SectionTitle>Who Is Eligible</SectionTitle>
+              <p className="mt-6 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)] sm:mt-8 sm:text-[17px]">
                 You qualify if you are a current or former employee of a Middle East-based travel or hospitality organisation, including:
               </p>
-              <div className="mt-8">
-                <CheckList invert items={eligibleOrganisations} />
+
+              <div className="mt-8 border-y border-[var(--interlines-azure)]/10 sm:mt-10">
+                {eligibleOrganisations.map((item, index) => (
+                  <div
+                    key={item}
+                    className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
+                      index !== 0 ? "border-t border-[var(--interlines-azure)]/10" : ""
+                    }`}
+                  >
+                    <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/75 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
+                      {item}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div className="mt-10 p-6 rounded-[1.5rem] bg-[var(--interlines-azure-deep)]/40 border border-white/10 shadow-inner group">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--interlines-gold-light)] mb-3">Family Eligibility</p>
-                <p className="text-[15px] leading-relaxed text-white/90">
+
+              <div className="mt-8 border-l-2 border-[var(--interlines-gold)]/40 pl-5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--interlines-slate)] sm:text-xs sm:tracking-[0.2em]">
+                  Family Eligibility
+                </p>
+                <p className="mt-3 text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
                   Spouse, children and parents may also travel at interline rates.
                 </p>
               </div>
-            </Card>
+            </div>
 
-            <div className="overflow-hidden rounded-[2.5rem] bg-white border border-[var(--interlines-azure)]/10 shadow-[0_20px_50px_rgba(48,117,128,0.08)] flex flex-col group relative">
-              <div className="relative h-48 sm:h-64 z-0 shrink-0">
-                <img
-                  src={homeImages.offers}
-                  alt="Cruise dining and onboard offers"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-[0.85] mix-blend-luminosity"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent" />
-              </div>
+            <div className="relative min-h-[26rem] overflow-hidden rounded-[0_2rem_0_2rem] shadow-[0_22px_60px_rgba(48,117,128,0.12)] sm:min-h-[32rem] sm:rounded-[0_2.5rem_0_2.5rem] xl:min-h-[35rem] xl:rounded-[0_3rem_0_3rem]">
+              <img
+                src={homeImages.offers}
+                alt="Cruise dining and onboard offers"
+                className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.28]"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,250,250,0.12)_0%,rgba(250,250,250,0.88)_40%,rgba(250,250,250,1)_100%)]" />
 
-              <div className="relative z-10 p-8 sm:p-10 flex-1 flex flex-col bg-white">
+              <div className="relative z-10 flex h-full flex-col justify-end p-6 sm:p-10 xl:p-12">
                 <SectionTitle>Current Cruise Offers</SectionTitle>
-                <p className="mt-4 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)]">
+                <p className="mt-4 text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
                   New offers are added regularly across destinations and cruise lines.
                 </p>
-                <p className="mt-4 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)]">
+                <p className="mt-4 text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
                   You may find:
                 </p>
-                <div className="mt-6 mb-8 border-t border-[var(--interlines-azure)]/10 pt-6">
-                  <CheckList items={currentCruiseOffers} />
+
+                <div className="mt-6 border-t border-[var(--interlines-azure)]/10 sm:mt-8">
+                  {currentCruiseOffers.map((item, index) => (
+                    <div
+                      key={item}
+                      className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
+                        index !== 0 ? "border-t border-[var(--interlines-azure)]/10" : ""
+                      }`}
+                    >
+                      <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/75 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <p className="text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-                <div className="mt-auto pt-6">
-                  <Pill href="/offers" variant="azure">
+
+                <div className="mt-10">
+                  <Pill href="/offers" variant="azure" className="w-full sm:w-auto">
                     View Latest Offers
                   </Pill>
                 </div>
               </div>
             </div>
           </div>
+        </Container>
+      </section>
 
-          <Card className="flex flex-col items-center text-center justify-center border-[var(--interlines-azure)]/10 hover:border-[var(--interlines-azure)]/20 transition-all duration-300 w-full mt-4">
-            <div className="mb-6 flex justify-center w-full">
-              <h2 className="font-display text-[1.75rem] leading-[1.06] tracking-[-0.03em] sm:text-4xl lg:text-[2.25rem] text-[var(--interlines-slate)]">
-                How to Register
-              </h2>
+      <section className="relative overflow-hidden border-y border-[var(--interlines-azure)]/10 bg-white/70 py-16 sm:py-24">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-full w-[34rem] -translate-x-1/2 bg-gradient-to-b from-[var(--interlines-azure-light)]/45 to-transparent" />
+        <Container className="relative px-5">
+          <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+            <div className="max-w-md">
+              <div className="mb-6 h-px w-14 bg-gradient-to-r from-[var(--interlines-gold)] to-transparent sm:mb-8 sm:w-16" />
+              <SectionTitle>How to Register</SectionTitle>
             </div>
-            
-            <div className="mt-8 grid sm:grid-cols-3 gap-8 w-full max-w-4xl mx-auto">
+
+            <div className="grid gap-px bg-[var(--interlines-azure)]/10 sm:grid-cols-2 xl:grid-cols-4">
               {registrationSteps.map((step, index) => (
-                <div key={step} className="flex flex-col items-center gap-4 group text-center">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--interlines-bg)] text-base font-bold tabular-nums ring-1 ring-[var(--interlines-azure)]/20 text-[var(--interlines-azure)] group-hover:bg-[var(--interlines-azure)] group-hover:text-white transition-all duration-300 group-hover:scale-110">
-                    {index + 1}
+                <div key={step} className="bg-white/90 px-5 py-6 backdrop-blur-sm sm:px-6 sm:py-7">
+                  <span className="block text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/75 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-[15px] leading-relaxed px-4 text-[var(--interlines-slate-soft)] group-hover:text-[var(--interlines-slate)] transition-colors duration-300 mt-2">
+                  <p className="mt-4 text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:mt-5 sm:text-[15px]">
                     {step}
-                  </span>
+                  </p>
                 </div>
               ))}
             </div>
+          </div>
 
-            <div className="mt-12 pt-8 border-t border-[var(--interlines-azure)]/5 w-full max-w-2xl mx-auto flex justify-center">
-              <Pill href="/request-access" variant="azure">
-                Register for Access
-              </Pill>
-            </div>
-          </Card>
+          <div className="mt-8 flex justify-stretch sm:mt-10 sm:justify-center">
+            <Pill href="/request-access" variant="azure" className="w-full sm:w-auto">
+              Register for Access
+            </Pill>
+          </div>
         </Container>
       </section>
 
       {/* CTA Footer Section */}
-      <section className="relative pt-20 pb-14 sm:pt-24 sm:pb-20">
+      <section className="relative pt-16 pb-12 sm:pt-24 sm:pb-20">
         <Container className="px-5">
-          <div className="relative overflow-hidden rounded-[3rem] shadow-[0_30px_60px_rgba(48,117,128,0.15)] isolate border border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure)] group">
+          <div className="group isolate relative overflow-hidden rounded-[2.25rem] border border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure)] shadow-[0_30px_60px_rgba(48,117,128,0.15)] sm:rounded-[3rem]">
             <img
               src={homeImages.hero}
               alt=""
@@ -307,24 +373,24 @@ export default function HomePage() {
             />
             <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[var(--interlines-azure)] to-[var(--interlines-azure)]/40 z-10" />
 
-            <div className="relative px-8 py-20 sm:p-24 max-w-4xl z-20">
-              <h2 className="font-display text-[2.5rem] leading-[1.05] tracking-[-0.03em] text-white sm:text-[4.5rem] drop-shadow-md">
+            <div className="relative z-20 max-w-4xl px-6 py-14 sm:p-24">
+              <h2 className="font-display text-[2.1rem] leading-[1.05] tracking-[-0.03em] text-white drop-shadow-md sm:text-[4.5rem]">
                 You&rsquo;ve spent your career helping others see the world.
-                <span className="block mt-4 text-[var(--interlines-gold-light)] italic py-2">
+                <span className="block py-2 text-[var(--interlines-gold-light)] italic mt-3 sm:mt-4">
                   Now it&rsquo;s your turn.
                 </span>
               </h2>
-              <p className="mt-8 max-w-[48ch] text-[17px] leading-relaxed text-white/90 font-light">
+              <p className="mt-6 max-w-[48ch] text-base font-light leading-relaxed text-white/90 sm:mt-8 sm:text-[17px]">
                 Join Interline Cruises Middle East and access exclusive cruise rates reserved for the travel industry.
               </p>
-              <div className="mt-12 flex flex-wrap gap-5">
-                <Pill href="/request-access" variant="white">
+              <div className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row sm:flex-wrap sm:gap-5">
+                <Pill href="/request-access" variant="white" className="w-full sm:w-auto">
                   Register Now
                 </Pill>
-                <Pill href="/login" variant="glass">
+                <Pill href="/login" variant="glass" className="w-full sm:w-auto">
                   Log In
                 </Pill>
-                <Pill href="/offers" variant="glass">
+                <Pill href="/offers" variant="glass" className="w-full sm:w-auto">
                   Explore Cruise Offers
                 </Pill>
               </div>

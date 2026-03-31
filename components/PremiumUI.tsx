@@ -14,11 +14,11 @@ export function SectionTitle({
 }) {
   return (
     <div className={`mb-6 ${align === "center" ? "text-center mx-auto" : ""}`}>
-      <h2 className={`font-display text-[2.25rem] leading-[1.06] tracking-[-0.03em] sm:text-[3rem] ${invert ? "text-white" : "text-[var(--interlines-slate)]"}`}>
+      <h2 className={`font-display text-[1.95rem] leading-[1.08] tracking-[-0.03em] sm:text-[2.45rem] lg:text-[3rem] ${invert ? "text-white" : "text-[var(--interlines-slate)]"}`}>
         {children}
       </h2>
       {highlight && (
-        <span className={`font-display text-[2rem] sm:text-[2.75rem] italic block mt-1 ${invert ? "text-[var(--interlines-gold)]" : "text-[var(--interlines-azure)]"}`}>
+        <span className={`font-display mt-1 block text-[1.7rem] italic sm:text-[2.35rem] lg:text-[2.75rem] ${invert ? "text-[var(--interlines-gold)]" : "text-[var(--interlines-azure)]"}`}>
           {highlight}
         </span>
       )}
@@ -102,7 +102,7 @@ export function Pill({
   return (
     <Link
       href={href}
-      className={`inline-flex h-12 items-center justify-center rounded-full px-8 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 hover:scale-105 ${cls} ${className}`}
+      className={`inline-flex min-h-12 max-w-full items-center justify-center rounded-full px-6 py-3 text-center text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:scale-105 sm:h-12 sm:px-8 sm:py-0 sm:text-xs sm:tracking-[0.2em] ${cls} ${className}`}
     >
       {children}
     </Link>
