@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function OffersPage() {
   return (
     <div className="bg-[var(--interlines-bg)] min-h-screen pb-24">
-      <PageHeader title="Current Cruise Offers" />
+      <PageHeader title="Current Cruise Offers" balanced />
 
       <Container className="max-w-4xl px-5 pt-16 sm:pt-20">
         <section className="rounded-[2.5rem] border border-[var(--interlines-azure)]/10 bg-white p-8 shadow-[0_15px_50px_rgba(48,117,128,0.06)] sm:p-14">

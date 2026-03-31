@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import BrandMark from "@/components/BrandMark";
 import Container from "@/components/Container";
-import { primaryNav } from "@/lib/siteContent";
+import { headerNav } from "@/lib/siteContent";
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -68,7 +68,7 @@ export default function SiteHeader() {
               : "hidden items-center justify-center gap-7 whitespace-nowrap text-[0.72rem] font-bold uppercase tracking-[0.28em] text-[var(--interlines-slate-soft)] md:flex"
           }
         >
-          {primaryNav.slice(1).map((item) => (
+          {headerNav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -133,7 +133,7 @@ export default function SiteHeader() {
         >
           <div className={`overflow-hidden rounded-[1.75rem] border p-4 backdrop-blur-xl ${mobilePanelTone}`}>
             <nav className="space-y-1">
-              {primaryNav.map((item) => (
+              {headerNav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}

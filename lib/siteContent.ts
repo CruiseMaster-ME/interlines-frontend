@@ -5,6 +5,11 @@ export const primaryNav = [
   { href: "/eligibility", label: "Eligibility" },
 ] as const;
 
+export const headerNav = [
+  { href: "/offers", label: "Special Offers" },
+  { href: "/cruise-lines", label: "Cruise Lines" },
+] as const;
+
 export const legalNav = [
   { href: "/terms-and-conditions", label: "Terms & Conditions" },
   { href: "/privacy-policy", label: "Privacy Policy" },
@@ -12,42 +17,34 @@ export const legalNav = [
 
 export const cruiseLines = [
   {
+    slug: "msc-cruises",
     name: "MSC Cruises",
-    href: "https://thecruisenews.com/cruises/msc-cruises/",
-    image:
-      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
   },
   {
+    slug: "costa-cruises",
     name: "Costa Cruises",
-    href: "https://thecruisenews.com/cruises/costa/",
-    image:
-      "https://images.unsplash.com/photo-1518544866330-95a7c4797f4f?auto=format&fit=crop&w=1200&q=80",
   },
   {
+    slug: "celestyal-cruises",
     name: "Celestyal Cruises",
-    href: "https://thecruisenews.com/cruises/celestyal/",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
   },
   {
+    slug: "aroya-cruises",
     name: "Aroya Cruises",
-    href: "https://thecruisenews.com/cruises/aroya-cruises/",
-    image:
-      "https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=1200&q=80",
   },
   {
+    slug: "norwegian-cruise-line",
     name: "Norwegian Cruise Line",
-    href: "https://thecruisenews.com/cruises/norwegian-cruise-line/",
-    image:
-      "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=1200&q=80",
   },
   {
+    slug: "royal-caribbean-international",
     name: "Royal Caribbean International",
-    href: "https://thecruisenews.com/cruises/royal-caribbean-international/",
-    image:
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80",
   },
 ] as const;
+
+export function getCruiseLineBySlug(slug: string) {
+  return cruiseLines.find((line) => line.slug === slug);
+}
 
 export const whyChooseUs = [
   "Built exclusively for the Middle East travel community",

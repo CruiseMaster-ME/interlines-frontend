@@ -1,17 +1,28 @@
 import React from "react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Container from "@/components/Container";
 
 export function PageHeader({
   title,
   subtitle,
   children,
+  balanced = false,
 }: {
   title: React.ReactNode;
   subtitle?: string;
   children?: React.ReactNode;
+  balanced?: boolean;
 }) {
+  const isBalanced = balanced || !children;
+
   return (
-    <div className="relative isolate overflow-hidden border-b border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure)] pt-20 pb-12 text-center sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-20">
+    <div
+      className={
+        isBalanced
+          ? "relative isolate overflow-hidden border-b border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure)] py-16 text-center sm:py-20 lg:py-24"
+          : "relative isolate overflow-hidden border-b border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure)] pt-20 pb-12 text-center sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-20"
+      }
+    >
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/15 via-[var(--interlines-azure)]/90 to-[var(--interlines-azure)]" />
         <div className="absolute left-[8%] top-[-18%] z-0 h-[420px] w-[420px] rounded-full bg-white/10 blur-[96px] pointer-events-none" />
@@ -19,6 +30,7 @@ export function PageHeader({
       </div>
 
       <Container className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-5">
+        <Breadcrumbs />
         {subtitle && (
           <span className="mb-4 text-[11px] font-bold uppercase tracking-[0.26em] text-[var(--interlines-gold-light)] drop-shadow-sm sm:mb-5 sm:text-xs">
             {subtitle}
