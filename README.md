@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+CruiseMaster Interlines Portal (Frontend)
 
-## Getting Started
+Production requirements:
+- Static Site Generation only (SSG)
+- Static export (`output: "export"`) — no Node runtime in production
+- No Next.js API routes / no server rendering
 
-First, run the development server:
+## Environment
+
+Create `interlines-frontend/.env.local`:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Laravel origin. Use empty string for same-origin deployment.
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+
+# Optional (used for SEO metadata base URL)
+NEXT_PUBLIC_SITE_URL=https://abc.com
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`NEXT_PUBLIC_API_BASE_URL` is baked into the static build.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cd interlines-frontend
+npm install
+npm run dev
+```
 
-## Learn More
+## Static export (IIS/CDN)
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cd interlines-frontend
+npm run build
+npm run export
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Static output is generated in `interlines-frontend/out/`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Authenticated pages (Dashboard/Booking) validate the Laravel session client-side by calling `GET /api/user`.
+- All dynamic logic (auth, approvals, JWT signing, Odysseus SSO) is handled by Laravel.

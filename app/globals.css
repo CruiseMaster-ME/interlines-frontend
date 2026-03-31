@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
+  --interlines-azure: #307580;
+  --interlines-azure-deep: #245860;
+  --interlines-azure-light: #eaf4f5;
+  --interlines-gold: #c9a96e;
+  --interlines-gold-light: #dfc89d;
+  --interlines-slate: #1e293b;
+  --interlines-slate-soft: #475569;
+  --interlines-bg: #fafafa;
+  --interlines-surface: #ffffff;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--interlines-bg);
+  color: var(--interlines-slate);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-brand {
+  font-family: var(--font-brand), Georgia, serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+}
+
+@keyframes interlines-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes interlines-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -15px, 0) scale(1.02);
+  }
+}
+
+@keyframes interlines-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes interlines-shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.home-reveal {
+  opacity: 0;
+  animation: interlines-rise 1000ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.home-float-slow {
+  animation: interlines-float 16s ease-in-out infinite;
+}
+
+.home-float-fast {
+  animation: interlines-float 12s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.home-glow {
+  animation: interlines-glow 8s ease-in-out infinite;
+}
+
+/* Updated for Light Mode */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(48, 117, 128, 0.1);
+  box-shadow: 0 10px 40px rgba(48, 117, 128, 0.05);
+}
+
+.glass-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: interlines-shimmer 5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-reveal,
+  .home-float-slow,
+  .home-float-fast,
+  .home-glow,
+  .glass-shine::after {
+    animation: none;
+    opacity: 1;
+  }
 }
