@@ -145,6 +145,7 @@ export default function AdminUsersClient() {
 
   function renderActions(user: ApiAdminManagedUser) {
     const isCurrentAdmin = admin?.id === user.id;
+    const isProtectedAdmin = user.role === "ADMIN";
     const approveBusy = busyKey === `approve-${user.id}`;
     const disableBusy = busyKey === `disable-${user.id}`;
     const deleteBusy = busyKey === `delete-${user.id}`;
@@ -161,7 +162,7 @@ export default function AdminUsersClient() {
           </button>
         )}
 
-        {user.status !== "DISABLED" && (
+        {user.status !== "DISABLED" && !isProtectedAdmin && (
           <button
             onClick={() => runAction("disable", user)}
             disabled={approveBusy || disableBusy || deleteBusy}
@@ -178,7 +179,7 @@ export default function AdminUsersClient() {
           </button>
         )}
 
-        {!isCurrentAdmin && (
+        {!isCurrentAdmin && !isProtectedAdmin && (
           <button
             onClick={() => runAction("delete", user)}
             disabled={approveBusy || disableBusy || deleteBusy}
@@ -193,6 +194,12 @@ export default function AdminUsersClient() {
               </>
             )}
           </button>
+        )}
+
+        {isProtectedAdmin && (
+          <span className="inline-flex h-9 items-center justify-center rounded-lg border border-[var(--interlines-azure)]/15 bg-[var(--interlines-azure-light)] px-3 text-xs font-semibold text-[var(--interlines-azure-deep)]">
+            Admin protected
+          </span>
         )}
       </div>
     );

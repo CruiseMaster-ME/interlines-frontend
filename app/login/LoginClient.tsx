@@ -3,7 +3,7 @@
 import { apiPost, clearCsrfTokenCache } from "@/lib/api";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "@/components/PremiumUI";
 import Container from "@/components/Container";
 import { useSessionContext } from "@/components/SessionProvider";
@@ -11,12 +11,23 @@ import { useSessionContext } from "@/components/SessionProvider";
 export default function LoginClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { refreshSession } = useSessionContext();
+  const { refreshSession, status } = useSessionContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const resetSuccess = searchParams.get("reset") === "success";
+
+  useEffect(() => {
+    if (status === "admin") {
+      router.replace("/admin");
+      return;
+    }
+
+    if (status === "user") {
+      router.replace("/dashboard");
+    }
+  }, [router, status]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -35,7 +46,6 @@ export default function LoginClient() {
       if (res.data.status === "APPROVED") {
         clearCsrfTokenCache();
         await refreshSession();
-        router.push("/dashboard");
         return;
       }
       if (res.data.status === "PENDING") {
