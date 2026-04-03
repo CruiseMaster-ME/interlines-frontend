@@ -151,14 +151,19 @@ export default function AdminUsersClient() {
     const deleteBusy = busyKey === `delete-${user.id}`;
 
     return (
-      <div className="flex flex-wrap gap-2">
+      <div className="inline-flex flex-nowrap items-center gap-2">
         {user.status !== "APPROVED" && (
           <button
             onClick={() => runAction("approve", user)}
             disabled={approveBusy || disableBusy || deleteBusy}
-            className="inline-flex h-9 items-center justify-center rounded-lg bg-[var(--interlines-azure)] px-3 text-xs font-semibold text-white transition-colors hover:bg-[var(--interlines-azure-deep)] disabled:pointer-events-none disabled:opacity-60"
+            title={approveBusy ? "Approving" : "Approve"}
+            aria-label={approveBusy ? "Approving user" : "Approve user"}
+            className="inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[var(--interlines-azure)] text-white transition-colors hover:bg-[var(--interlines-azure-deep)] disabled:pointer-events-none disabled:opacity-60"
           >
-            {approveBusy ? "Approving..." : "Approve"}
+            <CheckCircle2
+              className={cn("h-4 w-4", approveBusy && "animate-pulse")}
+              strokeWidth={2}
+            />
           </button>
         )}
 
@@ -166,16 +171,14 @@ export default function AdminUsersClient() {
           <button
             onClick={() => runAction("disable", user)}
             disabled={approveBusy || disableBusy || deleteBusy}
-            className="inline-flex h-9 items-center justify-center rounded-lg border border-slate-200 bg-white px-3 text-xs font-semibold text-[var(--interlines-slate)] transition-colors hover:bg-slate-50 disabled:pointer-events-none disabled:opacity-60"
+            title={disableBusy ? "Disabling" : "Disable"}
+            aria-label={disableBusy ? "Disabling user" : "Disable user"}
+            className="inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-white text-[var(--interlines-slate)] transition-colors hover:bg-slate-50 disabled:pointer-events-none disabled:opacity-60"
           >
-            {disableBusy ? (
-              "Disabling..."
-            ) : (
-              <>
-                <Ban className="mr-1.5 h-3.5 w-3.5" strokeWidth={1.8} />
-                Disable
-              </>
-            )}
+            <Ban
+              className={cn("h-4 w-4", disableBusy && "animate-pulse")}
+              strokeWidth={1.8}
+            />
           </button>
         )}
 
@@ -183,22 +186,23 @@ export default function AdminUsersClient() {
           <button
             onClick={() => runAction("delete", user)}
             disabled={approveBusy || disableBusy || deleteBusy}
-            className="inline-flex h-9 items-center justify-center rounded-lg border border-red-200 bg-red-50 px-3 text-xs font-semibold text-red-700 transition-colors hover:bg-red-100 disabled:pointer-events-none disabled:opacity-60"
+            title={deleteBusy ? "Deleting" : "Delete"}
+            aria-label={deleteBusy ? "Deleting user" : "Delete user"}
+            className="inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-red-200 bg-red-50 text-red-700 transition-colors hover:bg-red-100 disabled:pointer-events-none disabled:opacity-60"
           >
-            {deleteBusy ? (
-              "Deleting..."
-            ) : (
-              <>
-                <Trash2 className="mr-1.5 h-3.5 w-3.5" strokeWidth={1.8} />
-                Delete
-              </>
-            )}
+            <Trash2
+              className={cn("h-4 w-4", deleteBusy && "animate-pulse")}
+              strokeWidth={1.8}
+            />
           </button>
         )}
 
         {isProtectedAdmin && (
-          <span className="inline-flex h-9 items-center justify-center rounded-lg border border-[var(--interlines-azure)]/15 bg-[var(--interlines-azure-light)] px-3 text-xs font-semibold text-[var(--interlines-azure-deep)]">
-            Admin protected
+          <span
+            title="Admin protected"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--interlines-azure)]/15 bg-[var(--interlines-azure-light)] text-[var(--interlines-azure-deep)]"
+          >
+            <ShieldAlert className="h-4 w-4" strokeWidth={1.9} />
           </span>
         )}
       </div>
