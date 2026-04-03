@@ -55,7 +55,7 @@ export default function TermsPage() {
         <div className="space-y-5">
           <p>Effective from April 2026</p>
           <p>
-            Welcome to Interline Cruises Middle East ("ICME," "we," "our," "us"). By accessing or using this website and its services, you agree to comply with these Terms of Use and Booking Conditions. Please read them carefully before registering or making a booking.
+            Welcome to Interline Cruises Middle East (&quot;ICME,&quot; &quot;we,&quot; &quot;our,&quot; &quot;us&quot;). By accessing or using this website and its services, you agree to comply with these Terms of Use and Booking Conditions. Please read them carefully before registering or making a booking.
           </p>
           <p>If you do not agree with any part of these terms, you must not use this website.</p>
         </div>
@@ -218,7 +218,7 @@ export default function TermsPage() {
 
           <TermsSection title="11. Links to Third-Party Sites">
             <p>
-              Our website may include links to cruise line or travel partners' websites. These are provided for reference only.
+              Our website may include links to cruise line or travel partners&apos; websites. These are provided for reference only.
             </p>
             <p>
               ICME is not responsible for the accuracy, content, or privacy policies of external sites.

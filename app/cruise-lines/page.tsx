@@ -1,7 +1,8 @@
-import { ArrowRight, ImageIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/Container";
+import CruiseLineVisual from "@/components/CruiseLineVisual";
 import { PageHeader } from "@/components/PageHeader";
 import { cruiseLines } from "@/lib/siteContent";
 
@@ -22,14 +23,7 @@ export default function CruiseLinesPage() {
               <Link key={line.slug} href={`/cruise-lines/${line.slug}`} className="group block">
                 <article className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-[var(--interlines-azure)]/10 bg-white shadow-[0_16px_40px_rgba(48,117,128,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(48,117,128,0.1)]">
                   <div className="border-b border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure-light)]/40 p-5">
-                    <div className="flex min-h-[12.5rem] flex-col items-center justify-center rounded-[1.5rem] border border-dashed border-[var(--interlines-azure)]/16 bg-white/75 p-6 text-center">
-                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--interlines-azure)]/8 text-[var(--interlines-azure)]">
-                        <ImageIcon className="h-6 w-6" />
-                      </span>
-                      <p className="mt-4 font-display text-[1.35rem] leading-tight tracking-[-0.02em] text-[var(--interlines-slate)]">
-                        Image Coming Soon
-                      </p>
-                    </div>
+                    <CruiseLineVisual line={line} />
                   </div>
 
                   <div className="flex flex-1 flex-col p-6">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Container from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { CheckList, Card, Pill } from "@/components/PremiumUI";
+import Image from "next/image";
 import {
   expandedEligibleProfessions,
   familyEligibility,
@@ -64,9 +65,11 @@ export default function EligibilityPage() {
               </div>
 
               <div className="relative mt-8 min-h-[220px] flex-1 overflow-hidden rounded-[2rem] border border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure-light)]/25 shadow-[0_18px_45px_rgba(48,117,128,0.08)] lg:min-h-[280px]">
-                <img
+                <Image
                   src={eligibilityImage}
                   alt="Travel professionals eligible for exclusive cruise access"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--interlines-azure-deep)]/58 via-[var(--interlines-azure)]/12 to-transparent" />
@@ -146,9 +149,11 @@ export default function EligibilityPage() {
               You qualify if you work for a travel or hospitality organisation based in the Middle East and work in the region.
             </p>
             <div className="relative mt-6 min-h-[220px] flex-1 overflow-hidden rounded-[2rem] border border-[var(--interlines-azure)]/10 bg-white/55 shadow-[0_18px_45px_rgba(48,117,128,0.08)]">
-              <img
+              <Image
                 src={geographicEligibilityImage}
                 alt="Cruise access for Middle East-based travel professionals"
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
                 className="absolute inset-0 h-full w-full object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--interlines-azure-deep)]/62 via-[var(--interlines-azure)]/15 to-transparent" />

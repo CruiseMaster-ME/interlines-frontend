@@ -5,15 +5,52 @@ import { apiUrl } from "@/lib/config";
 export type ApiError = {
   message: string;
   code?: string;
+  fieldErrors?: Record<string, string[]>;
 };
 
 export type ApiUser = {
+  id: number;
+  first_name: string;
+  middle_name: string | null;
+  last_name: string;
+  title: "Mr" | "Mrs" | "Ms" | "Mst" | null;
+  gender: "M" | "F" | "U" | null;
+  date_of_birth: string | null;
+  email: string;
+  phone_country_code: string | null;
+  phone_number: string | null;
+  destination_phone_country_code: string | null;
+  destination_phone_number: string | null;
+  address_line_1: string | null;
+  address_line_2: string | null;
+  city: string | null;
+  state: string | null;
+  country: string | null;
+  postal_code: string | null;
+  status: "PENDING" | "APPROVED" | "DISABLED";
+  role: "USER" | "ADMIN";
+  booking_profile_ready: boolean;
+  booking_profile_missing_fields: string[];
+};
+
+export type ApiAdmin = {
   id: number;
   first_name: string;
   last_name: string;
   email: string;
   status: "PENDING" | "APPROVED" | "DISABLED";
   role: "USER" | "ADMIN";
+};
+
+export type ApiAdminManagedUser = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  status: "PENDING" | "APPROVED" | "DISABLED";
+  role: "USER" | "ADMIN";
+  created_at: string | null;
+  approved_at: string | null;
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -61,13 +98,61 @@ export async function ensureCsrfToken(forceRefresh = false) {
   return json.csrfToken;
 }
 
-export async function apiPost<TResponse>(
+function getErrorMessage(json: unknown, res: Response) {
+  if (isRecord(json)) {
+    if (typeof json.message === "string") {
+      const errors = json.errors;
+      if (isRecord(errors)) {
+        for (const value of Object.values(errors)) {
+          if (Array.isArray(value) && typeof value[0] === "string") {
+            return value[0];
+          }
+        }
+      }
+
+      return json.message;
+    }
+
+    const errors = json.errors;
+    if (isRecord(errors)) {
+      for (const value of Object.values(errors)) {
+        if (Array.isArray(value) && typeof value[0] === "string") {
+          return value[0];
+        }
+      }
+    }
+  }
+
+  if (res.status === 429) {
+    return "Too many requests. Please try again shortly.";
+  }
+
+  return "Request failed.";
+}
+
+function getFieldErrors(json: unknown) {
+  if (!isRecord(json) || !isRecord(json.errors)) return undefined;
+
+  const fieldErrors: Record<string, string[]> = {};
+  for (const [key, value] of Object.entries(json.errors)) {
+    if (Array.isArray(value)) {
+      fieldErrors[key] = value.filter(
+        (item): item is string => typeof item === "string",
+      );
+    }
+  }
+
+  return Object.keys(fieldErrors).length > 0 ? fieldErrors : undefined;
+}
+
+async function apiSend<TResponse>(
+  method: "POST" | "PATCH" | "DELETE",
   path: string,
   body: unknown,
 ): Promise<{ ok: true; data: TResponse } | { ok: false; error: ApiError }> {
   async function doRequest(csrf: string) {
     return fetch(apiUrl(path), {
-      method: "POST",
+      method,
       credentials: "include",
       headers: {
         Accept: "application/json",
@@ -91,22 +176,37 @@ export async function apiPost<TResponse>(
   const json = (await res.json().catch(() => ({}))) as unknown;
   if (res.ok) return { ok: true, data: json as TResponse };
 
-  const message =
-    isRecord(json) && typeof json.message === "string"
-      ? json.message
-      : res.status === 429
-        ? "Too many requests. Please try again shortly."
-        : "Request failed.";
-
   const code = isRecord(json) && typeof json.code === "string" ? json.code : undefined;
 
   return {
     ok: false,
     error: {
-      message,
+      message: getErrorMessage(json, res),
       code,
+      fieldErrors: getFieldErrors(json),
     },
   };
+}
+
+export async function apiPost<TResponse>(
+  path: string,
+  body: unknown,
+): Promise<{ ok: true; data: TResponse } | { ok: false; error: ApiError }> {
+  return apiSend("POST", path, body);
+}
+
+export async function apiPatch<TResponse>(
+  path: string,
+  body: unknown,
+): Promise<{ ok: true; data: TResponse } | { ok: false; error: ApiError }> {
+  return apiSend("PATCH", path, body);
+}
+
+export async function apiDelete<TResponse>(
+  path: string,
+  body: unknown = {},
+): Promise<{ ok: true; data: TResponse } | { ok: false; error: ApiError }> {
+  return apiSend("DELETE", path, body);
 }
 
 export async function apiGet<TResponse>(

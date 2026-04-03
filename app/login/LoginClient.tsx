@@ -2,17 +2,21 @@
 
 import { apiPost, clearCsrfTokenCache } from "@/lib/api";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Card } from "@/components/PremiumUI";
 import Container from "@/components/Container";
+import { useSessionContext } from "@/components/SessionProvider";
 
 export default function LoginClient() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { refreshSession } = useSessionContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const resetSuccess = searchParams.get("reset") === "success";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -30,6 +34,7 @@ export default function LoginClient() {
 
       if (res.data.status === "APPROVED") {
         clearCsrfTokenCache();
+        await refreshSession();
         router.push("/dashboard");
         return;
       }
@@ -55,21 +60,12 @@ export default function LoginClient() {
       </div>
 
       <Container className="relative z-10 w-full max-w-lg mx-auto px-5 py-20 pb-32 flex flex-col">
-        <div className="text-center mb-10">
-          <Link href="/" className="inline-block outline-none rounded-sm mb-6">
-            <span className="sr-only">Home</span>
-            <div className="h-10 w-10 mx-auto rounded-full bg-[var(--interlines-azure)] flex items-center justify-center">
-              <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 text-white">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-          </Link>
-          <h1 className="font-display text-[2.5rem] tracking-tight text-[var(--interlines-slate)]">
-            Member Secure <br />
-            <span className="italic text-[var(--interlines-azure)]">Login</span>
+        <div className="mb-8 text-center">
+          <h1 className="font-display text-[2.4rem] tracking-tight text-[var(--interlines-slate)]">
+            Sign In
           </h1>
-          <p className="mt-4 text-[15px] text-[var(--interlines-slate-soft)]">
-            Sign in to your verified Interline Cruises account.
+          <p className="mt-3 text-sm text-[var(--interlines-slate-soft)]">
+            Members only.
           </p>
         </div>
 
@@ -103,7 +99,24 @@ export default function LoginClient() {
                 className="h-12 w-full rounded-2xl border border-zinc-200 bg-white/50 px-5 text-[15px] shadow-sm outline-none transition-all placeholder:text-zinc-400 focus:border-[var(--interlines-azure)]/40 focus:bg-white focus:ring-[var(--interlines-azure)]/20 focus:ring-4"
                 placeholder="••••••••"
               />
+              <div className="flex justify-end pr-1">
+                <Link
+                  href="/forgot-password"
+                  className="text-[12px] font-semibold text-[var(--interlines-azure)] underline underline-offset-4 transition-colors hover:text-[var(--interlines-azure-deep)]"
+                >
+                  Forgot password?
+                </Link>
+              </div>
             </div>
+
+            {resetSuccess && (
+              <div className="rounded-xl border border-emerald-200 bg-emerald-50/80 backdrop-blur-sm px-4 py-3 text-sm text-emerald-800 flex items-center gap-3">
+                <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 shrink-0 text-emerald-600">
+                  <path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Your password has been updated. Sign in with the new password.
+              </div>
+            )}
 
             {error && (
               <div className="rounded-xl border border-red-200 bg-red-50/80 backdrop-blur-sm px-4 py-3 text-sm text-red-800 flex items-center gap-3">
@@ -119,7 +132,7 @@ export default function LoginClient() {
               disabled={isSubmitting}
               className="mt-2 h-12 w-full rounded-full bg-[var(--interlines-azure)] px-6 text-[13px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_4px_15px_rgba(48,117,128,0.25)] transition-all duration-300 hover:scale-[1.02] hover:bg-[var(--interlines-azure-deep)] focus:ring-[var(--interlines-azure)]/30 focus:ring-4 disabled:pointer-events-none disabled:opacity-60 disabled:hover:scale-100"
             >
-              {isSubmitting ? "Authenticating..." : "Sign In securely"}
+              {isSubmitting ? "Signing In..." : "Sign In"}
             </button>
           </form>
 

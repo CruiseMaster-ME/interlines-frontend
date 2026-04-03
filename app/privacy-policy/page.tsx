@@ -168,7 +168,7 @@ export default function PrivacyPolicyPage() {
               {privacyContactEmail}
             </p>
             <p className="text-sm">
-              Note: a separate email address is preferred to ensure Database related requests are not lost in generic 'support' or 'admin' email addresses.
+              Note: a separate email address is preferred to ensure Database related requests are not lost in generic &apos;support&apos; or &apos;admin&apos; email addresses.
             </p>
           </PrivacySection>
         </Card>

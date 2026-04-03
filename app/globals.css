@@ -21,6 +21,39 @@ body {
   color: var(--interlines-slate);
 }
 
+body.admin-route {
+  background:
+    linear-gradient(180deg, rgba(48, 117, 128, 0.04) 0%, rgba(48, 117, 128, 0) 18rem),
+    #f4f7f8;
+  overflow: hidden;
+}
+
+body.admin-route .site-header-shell,
+body.admin-route .site-footer-shell {
+  display: none;
+}
+
+body.admin-route .site-main-shell {
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+body:has(.admin-route-marker) .site-header-shell,
+body:has(.admin-route-marker) .site-footer-shell {
+  display: none;
+}
+
+body:has(.admin-route-marker) .site-main-shell {
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+body:has(.admin-route-marker) {
+  overflow: hidden;
+}
+
 .font-display {
   font-family: var(--font-display), Georgia, serif;
 }

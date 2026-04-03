@@ -1,10 +1,8 @@
-import { ChevronLeft, ImageIcon } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BreadcrumbsInner } from "@/components/Breadcrumbs";
 import Container from "@/components/Container";
-import { PageHeader } from "@/components/PageHeader";
-import { Pill } from "@/components/PremiumUI";
+import CruiseLineVisual from "@/components/CruiseLineVisual";
 import { cruiseLines, getCruiseLineBySlug } from "@/lib/siteContent";
 
 type CruiseLineDetailPageProps = {
@@ -33,7 +31,7 @@ export async function generateMetadata({
 
   return {
     title: `${line.name} - Interline Cruises Middle East`,
-    description: `Dedicated details screen for ${line.name}.`,
+    description: line.description,
   };
 }
 
@@ -49,51 +47,66 @@ export default async function CruiseLineDetailPage({
 
   return (
     <div className="min-h-screen bg-[var(--interlines-bg)] pb-24">
-      <PageHeader title={line.name} />
+      <Container className="max-w-6xl px-5 pt-10 sm:pt-12">
+        <section className="overflow-hidden rounded-[2rem] border border-[var(--interlines-azure)]/10 bg-white p-6 shadow-[0_16px_40px_rgba(48,117,128,0.06)] sm:p-8">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.95fr)] xl:items-start">
+            <div className="flex flex-col xl:pr-8">
+              <div className="space-y-6">
+                <BreadcrumbsInner variant="page" />
 
-      <Container className="max-w-5xl px-5 pt-16 sm:pt-20">
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <section className="rounded-[2.5rem] border border-[var(--interlines-azure)]/10 bg-white p-6 shadow-[0_18px_50px_rgba(48,117,128,0.06)] sm:p-8">
-            <div className="rounded-[2rem] border border-dashed border-[var(--interlines-azure)]/16 bg-[var(--interlines-azure-light)]/35 p-6 sm:p-8">
-              <div className="flex min-h-[24rem] flex-col items-center justify-center rounded-[1.5rem] bg-white/80 text-center">
-                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--interlines-azure)]/8 text-[var(--interlines-azure)]">
-                  <ImageIcon className="h-9 w-9" />
-                </span>
-                <p className="mt-6 font-display text-[1.75rem] leading-tight tracking-[-0.03em] text-[var(--interlines-slate)] sm:text-[2rem]">
-                  Image Coming Soon
+                <div>
+                  <h1 className="font-display text-[2.45rem] leading-[0.98] tracking-[-0.035em] text-[var(--interlines-slate)] sm:text-[3.2rem]">
+                    {line.name}
+                  </h1>
+                </div>
+              </div>
+
+              <div className="mt-8 border-t border-[var(--interlines-azure)]/10 pt-6">
+                <p className="text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[var(--interlines-azure)]">
+                  About
                 </p>
+
+                <div className="mt-5 space-y-5 text-[15px] leading-8 text-[var(--interlines-slate-soft)] sm:text-[16px]">
+                  {line.descriptionParagraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
             </div>
-          </section>
 
-          <section className="rounded-[2.5rem] border border-[var(--interlines-azure)]/10 bg-white p-8 shadow-[0_18px_50px_rgba(48,117,128,0.06)] sm:p-10">
-            <Link
-              href="/cruise-lines"
-              className="inline-flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[var(--interlines-azure)] transition-colors hover:text-[var(--interlines-azure-deep)]"
-            >
-              <ChevronLeft className="h-4 w-4" />
-              Back to Cruise Lines
-            </Link>
+            <div className="flex flex-col gap-6 xl:border-l xl:border-[var(--interlines-azure)]/10 xl:pl-8">
+              <div className="flex items-start justify-start">
+                <div className="w-full">
+                  <CruiseLineVisual
+                    line={line}
+                    variant="detail"
+                    className="h-[17rem] w-full !min-h-0 sm:h-[19rem] lg:h-[21rem]"
+                  />
+                </div>
+              </div>
 
-            <div className="mt-10 border-t border-[var(--interlines-azure)]/10 pt-8">
-              <h2 className="mt-5 font-display text-[2.3rem] leading-[1.02] tracking-[-0.03em] text-[var(--interlines-slate)]">
-                {line.name}
-              </h2>
-              <p className="mt-6 text-[16px] leading-relaxed text-[var(--interlines-slate-soft)]">
-                Details screen coming soon.
-              </p>
+              <div className="border-t border-[var(--interlines-azure)]/10 pt-6">
+                <p className="text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[var(--interlines-azure)]">
+                  Fleet
+                </p>
+                <h2 className="mt-3 font-display text-[1.8rem] leading-[1.02] tracking-[-0.03em] text-[var(--interlines-slate)] sm:text-[2rem]">
+                  Ships
+                </h2>
+
+                <div className="mt-5 flex flex-wrap items-center gap-y-2 text-[14px] leading-8 text-[var(--interlines-slate)] sm:text-[15px]">
+                  {line.ships.map((ship, index) => (
+                    <span key={ship} className="inline-flex items-center whitespace-nowrap">
+                      <span className="font-medium">{ship}</span>
+                      {index < line.ships.length - 1 ? (
+                        <span className="px-2 text-[var(--interlines-azure)]/45">|</span>
+                      ) : null}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Pill href="/cruise-lines" variant="glass">
-                Back to Cruise Lines
-              </Pill>
-              <Pill href="/offers" variant="azure">
-                Special Offers
-              </Pill>
-            </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </Container>
     </div>
   );

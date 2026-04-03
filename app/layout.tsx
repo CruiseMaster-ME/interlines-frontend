@@ -3,6 +3,7 @@ import { Cinzel, Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google"
 import "./globals.css";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import SessionProvider from "@/components/SessionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,11 +49,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${cormorantGaramond.variable} ${cinzel.variable} min-h-dvh bg-white text-zinc-900 antialiased`}
       >
-        <div className="flex min-h-dvh flex-col">
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
-        </div>
+        <SessionProvider>
+          <div className="flex min-h-dvh flex-col">
+            <div className="site-header-shell">
+              <SiteHeader />
+            </div>
+            <main className="site-main-shell flex-1">{children}</main>
+            <div className="site-footer-shell">
+              <SiteFooter />
+            </div>
+          </div>
+        </SessionProvider>
       </body>
     </html>
   );

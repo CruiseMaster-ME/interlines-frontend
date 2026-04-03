@@ -60,20 +60,11 @@ export default function RequestAccessClient() {
       </div>
 
       <Container className="relative z-10 w-full max-w-xl mx-auto px-5 py-20 pb-32 flex flex-col">
-        <div className="text-center mb-10">
-          <Link href="/" className="inline-block outline-none rounded-sm mb-6">
-            <span className="sr-only">Home</span>
-            <div className="h-10 w-10 mx-auto rounded-full bg-[var(--interlines-azure)] flex items-center justify-center">
-              <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 text-white">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-          </Link>
-          <h1 className="font-display text-[2.5rem] tracking-tight text-[var(--interlines-slate)]">
-            Registration <br />
-            <span className="italic text-[var(--interlines-azure)]">&amp; Request Access</span>
+        <div className="mb-8 text-center">
+          <h1 className="font-display text-[2.4rem] tracking-tight text-[var(--interlines-slate)]">
+            Register for Access
           </h1>
-          <p className="mt-4 text-[15px] text-[var(--interlines-slate-soft)] max-w-sm mx-auto">
+          <p className="mt-3 text-sm text-[var(--interlines-slate-soft)] max-w-sm mx-auto">
             Verification is required before you can access industry-only interline rates.
           </p>
         </div>
