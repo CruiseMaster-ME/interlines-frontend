@@ -1,139 +1,31 @@
-export const primaryNav = [
+type NavItem = {
+  href: string;
+  label: string;
+};
+
+export const primaryNav: readonly NavItem[] = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
   { href: "/cruise-lines", label: "Cruise Lines" },
   { href: "/faq", label: "FAQ" },
   { href: "/eligibility", label: "Eligibility" },
 ] as const;
 
-export const headerNav = [
-  { href: "/offers", label: "Special Offers" },
-  { href: "/cruise-lines", label: "Cruise Lines" },
-] as const;
+export const headerNav: readonly NavItem[] = [];
 
-export const legalNav = [
+export const legalNav: readonly NavItem[] = [
   { href: "/terms-and-conditions", label: "Terms & Conditions" },
   { href: "/privacy-policy", label: "Privacy Policy" },
 ] as const;
 
 export const cruiseLines = [
   {
-    slug: "msc-cruises",
-    name: "MSC Cruises",
-    logoSrc: "/assets/logos/cruise-lines/msc-cruises.png",
-    logoAlt: "MSC Cruises logo",
-    logoClassName: "scale-[0.94]",
-    imageSrc: "/assets/images/cruise-lines/msc-cruises.jpg",
-    imageAlt: "MSC World America at sea",
-    detailImageSrc: "/assets/images/cruise-lines/msc-cruises-detail.jpg",
-    detailImageAlt: "MSC Bellissima at sea",
-    description:
-      "MSC Cruises is the Swiss-Italian contemporary brand within the wider MSC Group and one of the fastest-growing cruise lines in the world. It operates large resort-style ships with strong reach across Europe, South America, the Middle East and Southern Africa.",
-    descriptionParagraphs: [
-      "MSC Cruises is a Swiss-Italian cruise line and one of the fastest-growing brands in global cruising, positioned as the contemporary arm of the wider MSC Group. It has built a particularly strong presence across Europe, South America, the Middle East and Southern Africa.",
-      "The line is known for European flair, large resort-style ships and a strong focus on families and multi-generational travel. Recent fleet development has leaned into next-generation design, including LNG-powered World Class ships and the broader sustainability story around Ocean Cay MSC Marine Reserve in the Bahamas.",
-      "Operations span more than 240 destinations worldwide, with year-round programs in the Mediterranean and Caribbean plus seasonal deployment across Northern Europe, North America, Asia, South America, the Middle East and Southern Africa. On board, the atmosphere is international, lively and distinctly Mediterranean in tone.",
-    ],
-    ships: [
-      "MSC Armonia",
-      "MSC Bellissima",
-      "MSC Divina",
-      "MSC Euribia",
-      "MSC Fantasia",
-      "MSC Grandiosa",
-      "MSC Lirica",
-      "MSC Magnifica",
-      "MSC Meraviglia",
-      "MSC Musica",
-      "MSC Opera",
-      "MSC Orchestra",
-      "MSC Poesia",
-      "MSC Preziosa",
-      "MSC Seascape",
-      "MSC Seashore",
-      "MSC Seaside",
-      "MSC Seaview",
-      "MSC Sinfonia",
-      "MSC Splendida",
-      "MSC Virtuosa",
-      "MSC World America",
-      "MSC World Asia",
-      "MSC World Atlantic",
-      "MSC World Europa",
-    ],
-  },
-  {
-    slug: "costa-cruises",
-    name: "Costa Cruises",
-    logoSrc: "/assets/logos/cruise-lines/costa-cruises.png",
-    logoAlt: "Costa Cruises logo",
-    logoClassName: "scale-[0.96]",
-    imageSrc: "/assets/images/cruise-lines/costa-cruises.jpg",
-    imageAlt: "Costa Toscana at sea",
-    detailImageSrc: "/assets/images/cruise-lines/costa-cruises-detail.jpg",
-    detailImageAlt: "Costa Toscana at sea",
-    description:
-      "Costa Cruises is an Italian line built around lively, sociable holidays with a strong Mediterranean identity. It is known for family-friendly ships, energetic nightlife and an onboard style that feels more relaxed and vibrant than formal.",
-    descriptionParagraphs: [
-      "Costa Cruises is built around a lively Italian holiday style, combining sociable ships, Mediterranean itineraries and a more energetic onboard atmosphere than traditional premium lines. It appeals strongly to families and guests looking for fun, relaxed cruising rather than a formal experience.",
-      "The onboard feel is colorful and upbeat, with Italian dining, family entertainment, late-night venues and a generally informal rhythm. Costa has also invested in newer LNG-powered ships such as Costa Smeralda and Costa Toscana while continuing to modernize the fleet.",
-      "Its route network centers on the Mediterranean, but the line also sails Northern Europe, the Canaries, the Middle East, the Caribbean, Asia and South America. The overall positioning is mainstream value with a distinct Italian identity.",
-    ],
-    ships: [
-      "Costa Serena",
-      "Costa Smeralda",
-      "Costa Toscana",
-      "Costa Deliziosa",
-      "Costa Diadema",
-      "Costa Fascinosa",
-      "Costa Favolosa",
-      "Costa Fortuna",
-      "Costa Pacifica",
-    ],
-  },
-  {
-    slug: "celestyal-cruises",
-    name: "Celestyal Cruises",
-    logoSrc: "/assets/logos/cruise-lines/celestyal-cruises.png",
-    logoAlt: "Celestyal Cruises logo",
-    logoClassName: "scale-[1.2]",
-    imageSrc: "/assets/images/cruise-lines/celestyal-cruises.png",
-    imageAlt: "Celestyal Discovery at sea",
-    detailImageSrc: "/assets/images/cruise-lines/celestyal-cruises-detail.jpg",
-    detailImageAlt: "Celestyal Discovery at sea",
-    description:
-      "Celestyal focuses on shorter Eastern Mediterranean voyages built around the Greek islands, Turkey and nearby ports. The line is known for Greek hospitality, itinerary-led cruising and an easy, family-friendly onboard atmosphere.",
-    descriptionParagraphs: [
-      "Celestyal is centered on authentically Greek cruising, with shorter voyages around the Greek islands, Turkey and the Eastern Mediterranean. The line is especially known for itinerary-led travel, local flavor and a welcoming, easygoing onboard atmosphere.",
-      "Its two mid-sized ships, Celestyal Discovery and Celestyal Journey, are positioned around value, comfort and destination access rather than large-ship attractions. Guests are drawn by Greek hospitality, included elements and cruise lengths that work well for shorter holidays.",
-      "Beyond Greece, the line also operates Gulf and Adriatic itineraries, including sailings from Dubai and Doha as well as routes through Croatia, Montenegro, Italy, Cyprus and nearby regions. The product remains strongly culture-led and destination focused.",
-    ],
-    ships: ["Celestyal Discovery", "Celestyal Journey"],
-  },
-  {
-    slug: "aroya-cruises",
-    name: "Aroya Cruises",
-    logoSrc: "/assets/logos/cruise-lines/aroya-cruises.jpg",
-    logoAlt: "Aroya Cruises logo",
-    logoClassName: "scale-[0.9]",
-    imageSrc: "/assets/images/cruise-lines/aroya-cruises.jpg",
-    imageAlt: "AROYA ship at sea",
-    detailImageSrc: "/assets/images/cruise-lines/aroya-cruises-detail.jpg",
-    detailImageAlt: "AROYA at sea",
-    description:
-      "AROYA Cruises was created by Cruise Saudi as a cruise line designed around Saudi and wider Arabian travel preferences. It combines large-ship resort facilities with Arabic-led service and Red Sea itineraries aimed at Middle Eastern family travel.",
-    descriptionParagraphs: [
-      "AROYA Cruises is the first cruise line designed from the ground up around Saudi and wider Arabian travel preferences. Developed by Cruise Saudi, it launched with a large refurbished resort-style ship and a service approach tailored to regional family travel.",
-      "The onboard concept blends large-ship facilities with Middle Eastern hospitality cues, including Arabic and international dining, family-oriented spaces, prayer areas and a mix of familiar cruise amenities adapted for regional expectations. The result is positioned to feel accessible for first-time cruise guests from the region.",
-      "After its initial Red Sea program from Jeddah, AROYA expanded into Mediterranean operations and is positioning itself for broader Gulf deployment. Its itineraries are designed to work both as regional getaways and as a bridge between Middle Eastern and European holiday markets.",
-    ],
-    ships: ["AROYA"],
-  },
-  {
     slug: "norwegian-cruise-line",
     name: "Norwegian Cruise Line",
-    logoSrc: "/assets/logos/cruise-lines/norwegian-cruise-line.png",
+    offersHref: "https://thecruisenews.com/cruises/norwegian-cruise-line/",
+    logoSrc: "/assets/logos/partner-cruise-lines/norwegian-cruise-line.png",
     logoAlt: "Norwegian Cruise Line logo",
-    logoClassName: "scale-[1.12]",
+    logoClassName: "scale-[1.04]",
     imageSrc: "/assets/images/cruise-lines/norwegian-cruise-line.jpg",
     imageAlt: "Norwegian Luna at sea",
     detailImageSrc: "/assets/images/cruise-lines/norwegian-cruise-line-detail.jpg",
@@ -169,13 +61,37 @@ export const cruiseLines = [
       "Norwegian Viva",
       "Pride of America",
     ],
+    destinations: [],
+  },
+  {
+    slug: "celestyal-cruises",
+    name: "Celestyal Cruises",
+    offersHref: "https://thecruisenews.com/cruises/celestyal/",
+    logoSrc: "/assets/logos/partner-cruise-lines/celestyal-cruises.svg",
+    logoAlt: "Celestyal Cruises logo",
+    logoClassName: "scale-[1.08]",
+    imageSrc: "/assets/images/cruise-lines/celestyal-cruises.png",
+    imageAlt: "Celestyal Discovery at sea",
+    detailImageSrc: "/assets/images/cruise-lines/celestyal-cruises-detail.jpg",
+    detailImageAlt: "Celestyal Discovery at sea",
+    description:
+      "Celestyal focuses on shorter Eastern Mediterranean voyages built around the Greek islands, Turkey and nearby ports. The line is known for Greek hospitality, itinerary-led cruising and an easy, family-friendly onboard atmosphere.",
+    descriptionParagraphs: [
+      "Celestyal is centered on authentically Greek cruising, with shorter voyages around the Greek islands, Turkey and the Eastern Mediterranean. The line is especially known for itinerary-led travel, local flavor and a welcoming, easygoing onboard atmosphere.",
+      "Its two mid-sized ships, Celestyal Discovery and Celestyal Journey, are positioned around value, comfort and destination access rather than large-ship attractions. Guests are drawn by Greek hospitality, included elements and cruise lengths that work well for shorter holidays.",
+      "Beyond Greece, the line also operates Gulf and Adriatic itineraries, including sailings from Dubai and Doha as well as routes through Croatia, Montenegro, Italy, Cyprus and nearby regions. The product remains strongly culture-led and destination focused.",
+    ],
+    ships: ["Celestyal Discovery", "Celestyal Journey"],
+    destinations: [],
   },
   {
     slug: "royal-caribbean-international",
     name: "Royal Caribbean International",
-    logoSrc: "/assets/logos/cruise-lines/royal-caribbean-international.png",
+    offersHref:
+      "https://thecruisenews.com/cruises/royal-caribbean-international/",
+    logoSrc: "/assets/logos/partner-cruise-lines/royal-caribbean-international.png",
     logoAlt: "Royal Caribbean International logo",
-    logoClassName: "scale-[0.9]",
+    logoClassName: "scale-[0.88]",
     imageSrc: "/assets/images/cruise-lines/royal-caribbean-international.jpg",
     imageAlt: "Legend of the Seas at sea",
     detailImageSrc: "/assets/images/cruise-lines/royal-caribbean-international-detail.jpg",
@@ -220,69 +136,205 @@ export const cruiseLines = [
       "Voyager of the Seas",
       "Wonder of the Seas",
     ],
+    destinations: [],
+  },
+  {
+    slug: "princess-cruises",
+    name: "Princess Cruises",
+    offersHref: "https://thecruisenews.com/cruises/princess/",
+    logoSrc: "/assets/logos/partner-cruise-lines/princess-cruises.png",
+    logoAlt: "Princess Cruises logo",
+    logoClassName: "scale-[0.96]",
+    imageSrc: "",
+    imageAlt: "Image not available",
+    detailImageSrc: "",
+    detailImageAlt: "Image not available",
+    description: "Data not available.",
+    descriptionParagraphs: [],
+    ships: [],
+    destinations: [],
+  },
+  {
+    slug: "cunard",
+    name: "Cunard",
+    offersHref: "https://thecruisenews.com/cruises/cunard/",
+    logoSrc: "/assets/logos/partner-cruise-lines/cunard.png",
+    logoAlt: "Cunard logo",
+    logoClassName: "scale-[1.02]",
+    imageSrc: "",
+    imageAlt: "Image not available",
+    detailImageSrc: "",
+    detailImageAlt: "Image not available",
+    description: "Data not available.",
+    descriptionParagraphs: [],
+    ships: [],
+    destinations: [],
+  },
+  {
+    slug: "p-and-o-cruises",
+    name: "P&O Cruises",
+    offersHref: "https://thecruisenews.com/cruises/poc/",
+    logoSrc: "/assets/logos/partner-cruise-lines/p-and-o-cruises.png",
+    logoAlt: "P&O Cruises logo",
+    logoClassName: "scale-[0.9]",
+    imageSrc: "",
+    imageAlt: "Image not available",
+    detailImageSrc: "",
+    detailImageAlt: "Image not available",
+    description: "Data not available.",
+    descriptionParagraphs: [],
+    ships: [],
+    destinations: [],
+  },
+  {
+    slug: "oceania-cruises",
+    name: "Oceania Cruises",
+    offersHref: "https://thecruisenews.com/cruises/oceania-cruises/",
+    logoSrc: "/assets/logos/partner-cruise-lines/oceania-cruises.png",
+    logoAlt: "Oceania Cruises logo",
+    logoClassName: "scale-[0.94]",
+    imageSrc: "",
+    imageAlt: "Image not available",
+    detailImageSrc: "",
+    detailImageAlt: "Image not available",
+    description: "Data not available.",
+    descriptionParagraphs: [],
+    ships: [],
+    destinations: [],
+  },
+  {
+    slug: "regent-seven-seas-cruises",
+    name: "Regent Seven Seas Cruises",
+    offersHref:
+      "https://thecruisenews.com/cruises/regent-seven-seas-cruises/",
+    logoSrc:
+      "/assets/logos/partner-cruise-lines/regent-seven-seas-cruises.png",
+    logoAlt: "Regent Seven Seas Cruises logo",
+    logoClassName: "scale-[0.98]",
+    imageSrc: "",
+    imageAlt: "Image not available",
+    detailImageSrc: "",
+    detailImageAlt: "Image not available",
+    description: "Data not available.",
+    descriptionParagraphs: [],
+    ships: [],
+    destinations: [],
+  },
+  {
+    slug: "celebrity-cruises",
+    name: "Celebrity Cruises",
+    offersHref: "https://thecruisenews.com/cruises/celebrity/",
+    logoSrc: "/assets/logos/partner-cruise-lines/celebrity-cruises.png",
+    logoAlt: "Celebrity Cruises logo",
+    logoClassName: "scale-[0.98]",
+    imageSrc: "",
+    imageAlt: "Image not available",
+    detailImageSrc: "",
+    detailImageAlt: "Image not available",
+    description: "Data not available.",
+    descriptionParagraphs: [],
+    ships: [],
+    destinations: [],
+  },
+  {
+    slug: "carnival-cruise-line",
+    name: "Carnival Cruise Line",
+    offersHref: "https://thecruisenews.com/cruises/carnival/",
+    logoSrc: "/assets/logos/partner-cruise-lines/carnival-cruise-line.png",
+    logoAlt: "Carnival Cruise Line logo",
+    logoClassName: "scale-[1.02]",
+    imageSrc: "",
+    imageAlt: "Image not available",
+    detailImageSrc: "",
+    detailImageAlt: "Image not available",
+    description: "Data not available.",
+    descriptionParagraphs: [],
+    ships: [],
+    destinations: [],
+  },
+  {
+    slug: "ama-waterways",
+    name: "AMA Waterways",
+    offersHref: "https://thecruisenews.com/cruises/amawaterways/",
+    logoSrc: "/assets/logos/partner-cruise-lines/ama-waterways.png",
+    logoAlt: "AMA Waterways logo",
+    logoClassName: "scale-[1.02]",
+    imageSrc: "",
+    imageAlt: "Image not available",
+    detailImageSrc: "",
+    detailImageAlt: "Image not available",
+    description: "Data not available.",
+    descriptionParagraphs: [],
+    ships: [],
+    destinations: [],
+  },
+  {
+    slug: "avalon-waterways",
+    name: "Avalon Waterways",
+    offersHref: "https://thecruisenews.com/cruises/avalon-waterways/",
+    logoSrc: "/assets/logos/partner-cruise-lines/avalon-waterways.png",
+    logoAlt: "Avalon Waterways logo",
+    logoClassName: "scale-[0.98]",
+    imageSrc: "",
+    imageAlt: "Image not available",
+    detailImageSrc: "",
+    detailImageAlt: "Image not available",
+    description: "Data not available.",
+    descriptionParagraphs: [],
+    ships: [],
+    destinations: [],
   },
 ] as const;
 
 export type CruiseLine = (typeof cruiseLines)[number];
 
-export function getCruiseLineBySlug(slug: string) {
+export function getCruiseLineBySlug(slug: string): CruiseLine | undefined {
   return cruiseLines.find((line) => line.slug === slug);
 }
 
-export const whyChooseUs = [
-  "Built exclusively for the Middle East travel community",
-  "Verified access that protects genuine industry benefits",
-  "Direct partnerships with trusted global cruise brands",
-  "Seamless registration, verification and booking in one place",
-  "Exclusive discounts starting from 10 percent",
-  "Access for both current and retired professionals and their families",
-] as const;
+export const partnerCruiseLines = cruiseLines.map((line) => ({
+  name: line.name,
+  href: `/cruise-lines/${line.slug}`,
+  logoSrc: line.logoSrc,
+  logoAlt: line.logoAlt,
+  logoClassName: line.logoClassName,
+}));
 
-export const memberBenefits = [
-  "Minimum 10 percent savings on selected cruises",
-  "Access to exclusive interline-only promotions",
-  "Eligibility extended to your immediate family",
-  "One central hub for cruise offers across brands",
-  "Direct booking with no third-party service fees",
-] as const;
+export const homeHeroSubtitle =
+  "Exclusive discounted cruise fares for airline, travel, tourism and hospitality professionals across the Middle East.";
 
 export const programmeSteps = [
-  "Register using your company email",
-  "Get verified through email or employment proof",
-  "Receive login access",
-  "Browse cruise offers with your discount included",
-  "Book and receive confirmation directly",
-] as const;
-
-export const registrationSteps = [
-  "Complete the registration form",
-  "Submit your company email or employment proof",
-  "Get verified and approved",
-  "Log in and start exploring",
+  "Register with your business email for verification",
+  "Get approved",
+  "Log in and access interline rates",
+  "Book with your discount applied",
 ] as const;
 
 export const eligibleOrganisations = [
   "Airlines",
-  "Airports and aviation organisations",
-  "Travel agencies, tour operators, GSAs and DMCs",
+  "Airports and aviation services",
+  "Travel agencies and tour operators",
   "Hotels and hospitality groups",
-  "Tourism boards",
+  "Tourism boards and destination management companies",
+  "Cargo, charter and GSA representatives",
+  "Ground handling and air services",
 ] as const;
 
 export const expandedEligibleProfessions = [
-  "Airline staff",
-  "Airport and aviation professionals",
-  "Travel agents and tour operators",
-  "Hotel and hospitality employees",
+  "Airlines",
+  "Airports and aviation services",
+  "Travel agencies and tour operators",
+  "Hotels and hospitality groups",
   "Tourism boards and destination management companies",
   "Cargo, charter and GSA representatives",
-  "Ground handling and air services staff",
+  "Ground handling and air services",
 ] as const;
 
 export const familyEligibility = [
-  "Spouse or partner",
-  "Dependent children",
+  "Spouse",
+  "Children",
   "Parents",
+  "Friends",
 ] as const;
 
 export const currentCruiseOffers = [
@@ -292,114 +344,116 @@ export const currentCruiseOffers = [
 ] as const;
 
 export const homeIntroduction = [
-  "While in the air, have you ever wished you were at sea instead?",
-  "If you work in travel or hospitality, you spend your days helping others explore the world. This is your chance to experience it yourself at exclusive, industry-only rates.",
-  "Interline Cruises Middle East brings together leading cruise lines offering verified travel professionals access to special fares, including a guaranteed 10% interline discount.",
-  "Once registered, you can browse offers, explore cruise lines and book directly, with your discount already applied.",
-  "These rates are not available to the public. They are a small thank you to those who keep the world moving, giving you the opportunity to see it from a different perspective.",
+  "For the ones who keep travel moving, this one’s for you.",
+  "You help people turn travel dreams into memories. Whether you work across an airline, support travellers on the ground, welcome guests in hotels or shape the experiences that bring destinations to life, you play a part in creating holidays people never forget. You understand the excitement of a long awaited break, the joy of discovering somewhere new and the magic of a journey that unfolds exactly as it should.",
+  "And because you spend so much of your energy making travel seamless for others, you deserve a holiday that feels just as effortless for you. A chance to step away from the pace of daily operations and into a world where everything is taken care of. Where you can unpack once, wake up somewhere new each morning, and enjoy the perfect blend of relaxation, entertainment and discovery that only a cruise can offer.",
+  "That is exactly what Interline Cruises Middle East brings to you.",
+  "A dedicated space where the travel community can access exclusive, verified interline rates on cruise holidays. Once you are registered and verified, you can browse offers, explore ships and destinations, and book directly with your industry discount already applied.",
+  "These fares are not public. They exist as a quiet thank you, giving you the chance to enjoy a complete holiday experience that is as rewarding as it is relaxing.",
 ] as const;
 
 export const whoWeAreParagraphs = [
-  "We are the region’s first dedicated platform connecting Middle East travel and hospitality professionals with exclusive cruise offers from leading global cruise lines.",
-  "Created for those who live and breathe travel, this platform gives you access to experiences you would usually recommend, now reserved for you.",
+  "Interline Cruises Middle East is the region’s first platform created specifically for the travel community. A place designed for those who live and breathe travel, where the cruise holidays you often recommend to others are now reserved for you.",
+  "As a registered member, you can explore cruise lines and book your next holiday directly through a secure platform with your exclusive industry discount already included.",
 ] as const;
 
-export const whoWeAreMemberActions = [
-  "Browse current interline cruise offers",
-  "Explore ships, itineraries and destinations",
-  "Book directly through a secure platform with your discount applied",
+export const whyChooseUsParagraphs = [
+  "When you work in travel, you are used to being the one who makes journeys possible. Here, you are the one being looked after. Interline Cruises Middle East was built exclusively for the region’s travel professionals, offering a trusted space where your industry status unlocks real value.",
+  "Your verification protects genuine industry benefits, ensuring these fares remain reserved for those who have earned them. And because we partner directly with global cruise brands, you gain access to authentic interline discounts with no hidden fees or third party markups. And yes, your family and friends get to enjoy the perks too.",
+  "One platform, one login, and a world of cruise holidays ready to explore.",
 ] as const;
 
-export const formerEmployeeProofItems = [
-  "Previous staff ID card or business card",
-  "Company documentation",
-  "Other supporting records",
+export const homeEligibilityParagraph =
+  "If you are part of the Middle East travel or hospitality ecosystem, you qualify for interline access once verified. Your role, your experience and your contribution to the industry is what opens the door.";
+
+export const homeFamilyEligibilityParagraph =
+  "Your interline benefits extend beyond you. Your spouse, children, parents and friends can sail using your industry access. Whether you are travelling together or gifting them a well-deserved break, your verification unlocks exclusive cruise savings for the people you care about.";
+
+export const homeEligibilityClosing =
+  "Join Interline Cruises Middle East and unlock exclusive cruise rates reserved for the travel industry.";
+
+export const homePartnerCruiseLinesParagraphs = [
+  "Cruising is one of the easiest ways to switch off and truly unwind. With your interline access, it becomes even more accessible, whether you are looking for a short escape or a longer voyage across continents.",
+  "You will find offers across a wide range of the world’s most loved cruise lines, from contemporary and premium brands to luxury, river, expedition and niche experiences. Each one brings something different to the journey, and all of them are now within reach.",
+  "All displayed fares already include your interline benefit. Additional promotions may apply where available. New offers are added regularly across destinations, seasons and cruise lines. Your next holiday might already be waiting.",
 ] as const;
 
-export const faqItems = [
+export const partnerCruiseLinesSummary =
+  "Norwegian Cruise Line, Celestyal Cruises, Royal Caribbean International, Princess Cruises, Cunard, P&O Cruises, Oceania Cruises, Regent Seven Seas Cruises, Celebrity Cruises, Carnival Cruise Line, AMA Waterways, Avalon Waterways and more.";
+
+export type FaqItem = {
+  question: string;
+  paragraphs: readonly string[];
+  listItems?: readonly string[];
+  afterListParagraphs?: readonly string[];
+};
+
+export const faqItems: readonly FaqItem[] = [
   {
     question: "What are interline cruise rates?",
     paragraphs: [
-      "Interline cruise rates are special discounted fares offered by cruise lines to professionals working in the travel and hospitality industry.",
-      "These rates are extended to airline employees, travel agents, tourism professionals and other industry staff as part of long-standing travel partnerships.",
-      "Through Interline Cruises Middle East, eligible members can access exclusive cruise offers with a 10% interline discount, giving you the opportunity to experience leading cruise lines at preferred rates.",
+      "Interline cruise rates are exclusive, privately offered fares that cruise lines reserve for professionals working in the airline, travel, tourism and hospitality industry.",
+      "These fares are not available to the public.",
+      "They are part of long standing industry partnerships that recognise the people who help keep global travel moving.",
+      "Through Interline Cruises Middle East, eligible members can access these special cruise offers and book holidays at preferred industry only rates.",
     ],
   },
   {
     question: "Who qualifies for interline cruise rates?",
     paragraphs: [
-      "Interline cruise rates are available to current and former employees working in organisations in the travel and hospitality sector in the Middle East.",
-      "This includes professionals from airlines, airports, travel agencies, tour operators, hotels, tourism boards and related organisations.",
+      "Interline cruise rates are available to current employees working in airline, travel, tourism or hospitality organisations based in the Middle East.",
+      "This includes professionals working across airlines, airports, travel agencies, tour operators, hotels, tourism boards and related organisations within the region.",
     ],
   },
   {
     question: "Can former travel industry employees apply?",
     paragraphs: [
-      "Yes. If you have previously worked for an eligible travel or hospitality organisation in the Middle East, you can still apply.",
-      "You will need to provide proof of your previous employment during registration, such as:",
-    ],
-    listItems: [
-      "a former employee ID card or business card",
-      "company documentation",
-      "other supporting records",
-    ],
-    afterListParagraphs: [
-      "Once verified, you will receive access to the platform and available cruise offers.",
+      "No. Interline Cruises Middle East is currently available only to active, full time employees working in eligible organisations within the Middle East.",
     ],
   },
   {
     question: "Can family members travel at interline rates?",
     paragraphs: [
-      "Yes. Registered members can extend interline benefits to their immediate family.",
-      "This typically includes:",
-    ],
-    listItems: ["spouse", "children", "parents"],
-    afterListParagraphs: [
-      "Family members can travel with you, or bookings can be made through your verified account.",
+      "Yes. Your interline benefits extend to your spouse, children, parents and friends. They can travel with you, or you can book a cruise for them through your verified account.",
+      "Your verification unlocks access for the people you care about.",
     ],
   },
   {
     question: "Do I need to prove my employment?",
     paragraphs: [
       "Yes. Verification is required to ensure that interline benefits remain exclusive to the travel industry.",
-      "You can verify your eligibility using:",
-    ],
-    listItems: [
-      "your company email address",
-      "proof of employment such as an ID card or official documentation",
-    ],
-    afterListParagraphs: [
-      "This process helps maintain a secure and trusted platform.",
+      "You can verify your eligibility using your business email address or by providing official proof of employment, such as a staff ID or company documentation.",
+      "This helps maintain a secure and trusted platform for all members.",
     ],
   },
   {
     question: "Do I need to work in the Middle East to qualify?",
     paragraphs: [
-      "Yes. You must be employed by and based within a Middle East travel or hospitality organisation to qualify.",
+      "Yes. You must be currently employed by an airline, travel, tourism or hospitality organisation based in the Middle East.",
       "These interline rates are specifically designed for professionals working within the region.",
     ],
   },
   {
     question: "Are interline fares lower than public cruise prices?",
     paragraphs: [
-      "Interline fares are privately negotiated and are often lower than publicly available cruise prices.",
-      "They may also include access to selected promotions that are not available to general travellers.",
+      "Interline fares are privately negotiated and often lower than publicly available cruise prices.",
+      "They may also include access to selected promotions that are not offered to general travellers.",
     ],
   },
   {
     question: "Is there a cost to register?",
     paragraphs: [
       "No. Registration is free for eligible travel and hospitality professionals.",
-      "The platform is designed as a benefit for the industry, giving you access to exclusive cruise offers.",
+      "The platform is designed as an industry benefit, giving you access to exclusive cruise offers.",
     ],
   },
   {
     question: "Can I book cruises directly through the website?",
     paragraphs: [
       "Yes. Once logged in, you can browse available cruise offers and complete your booking directly through the platform.",
-      "Your interline discount is automatically applied, so you can book with confidence.",
+      "Your interline discount is automatically applied, so you can book with confidence",
     ],
   },
-] as const;
+];
 
 export const privacyContactEmail = "privacy@interlinecruisesme.com";

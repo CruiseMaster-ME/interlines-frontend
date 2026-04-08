@@ -25,7 +25,7 @@ export default function LoginClient() {
     }
 
     if (status === "user") {
-      router.replace("/dashboard");
+      router.replace("/cruise-search");
     }
   }, [router, status]);
 

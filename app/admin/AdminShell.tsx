@@ -189,10 +189,10 @@ export default function AdminShell({
                     admin ? (
                       <>
                         <Link
-                          href="/dashboard"
+                          href="/cruise-search"
                           className="inline-flex h-10 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-[var(--interlines-slate)] transition-colors hover:bg-slate-50"
                         >
-                          Member Area
+                          Cruise Search
                         </Link>
                         <button
                           onClick={onLogout}

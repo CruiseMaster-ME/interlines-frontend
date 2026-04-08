@@ -70,6 +70,15 @@ img {
   display: block;
 }
 
+.odysseus-search-host {
+  width: 100%;
+}
+
+.odysseus-search-host ody-search-form {
+  display: block;
+  width: 100%;
+}
+
 @keyframes interlines-rise {
   from {
     opacity: 0;

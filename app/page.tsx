@@ -3,21 +3,26 @@
 import type { Metadata } from "next";
 import { Mouse } from "lucide-react";
 import Container from "@/components/Container";
+import CruiseLineShowcaseSection from "@/components/CruiseLineShowcaseSection";
+import IntroSplitSection from "@/components/IntroSplitSection";
 import {
-  currentCruiseOffers,
-  eligibleOrganisations,
+  homeEligibilityClosing,
+  homeEligibilityParagraph,
+  homeFamilyEligibilityParagraph,
+  homeHeroSubtitle,
   homeIntroduction,
-  memberBenefits,
+  homePartnerCruiseLinesParagraphs,
+  partnerCruiseLines,
   programmeSteps,
-  registrationSteps,
-  whoWeAreMemberActions,
   whoWeAreParagraphs,
-  whyChooseUs,
+  whyChooseUsParagraphs,
 } from "@/lib/siteContent";
+import { cn } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "Home",
-  description: "Exclusive cruise rates for Middle East travel professionals.",
+  description:
+    "Exclusive discounted cruise fares for airline, travel, tourism and hospitality professionals across the Middle East.",
 };
 
 const homeImages = {
@@ -34,6 +39,11 @@ import {
 
 export default function HomePage() {
   const [introductionHeading, ...introductionBody] = homeIntroduction;
+  const introductionHeadingBreak = ", ";
+  const [
+    introductionHeadingLead = introductionHeading,
+    introductionHeadingTail,
+  ] = introductionHeading.split(introductionHeadingBreak);
 
   return (
     <div className="bg-[var(--interlines-bg)] text-[var(--interlines-slate-soft)] selection:bg-[var(--interlines-azure)]/20 selection:text-[var(--interlines-azure-deep)] w-full overflow-hidden">
@@ -64,11 +74,11 @@ export default function HomePage() {
               </span>
             </h1>
             <p className="mt-6 max-w-[22rem] text-base font-medium leading-relaxed text-white/90 sm:mt-8 sm:max-w-2xl sm:text-xl">
-              Exclusive cruise rates for Middle East travel professionals.
+              {homeHeroSubtitle}
             </p>
             <div className="mt-10 flex flex-wrap gap-4 sm:mt-12">
-              <Pill href="/offers" variant="white" className="w-full sm:w-auto">
-                Explore Cruise Offers
+              <Pill href="/#home-introduction" variant="white" className="w-full sm:w-auto">
+                Explore More
               </Pill>
             </div>
           </div>
@@ -87,34 +97,22 @@ export default function HomePage() {
       </section>
 
       {/* Introduction */}
-      <section
+      <IntroSplitSection
         id="home-introduction"
-        className="relative z-20 pt-16 pb-20 sm:pt-20 sm:pb-24"
-      >
-        <Container className="px-5">
-          <div className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
-            <div className="order-2 group relative min-h-[250px] overflow-hidden rounded-[2rem_0_2rem_0] shadow-[0_24px_65px_rgba(48,117,128,0.12)] sm:min-h-[360px] sm:rounded-[2.4rem_0_2.4rem_0] lg:order-1 lg:min-h-[460px] lg:rounded-[2.75rem_0_2.75rem_0]">
-              <img
-                src={homeImages.intro}
-                alt="Cruise experience for travel professionals"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--interlines-azure-deep)]/52 via-[var(--interlines-azure)]/10 to-transparent" />
-              <div className="absolute inset-0 ring-1 ring-inset ring-white/18" />
-            </div>
-
-            <div className="order-1 relative max-w-xl lg:order-2 lg:pl-4">
-              <div className="mb-6 h-px w-14 bg-gradient-to-r from-[var(--interlines-gold)] to-transparent sm:mb-8 sm:w-16" />
-              <SectionTitle>{introductionHeading}</SectionTitle>
-              <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)] sm:mt-8 sm:space-y-6 sm:text-[17px]">
-                {introductionBody.map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
+        title={
+          introductionHeadingTail ? (
+            <>
+              {`${introductionHeadingLead}${introductionHeadingBreak.trimEnd()}`}
+              <span className="block">{introductionHeadingTail}</span>
+            </>
+          ) : (
+            introductionHeading
+          )
+        }
+        paragraphs={introductionBody}
+        imageSrc={homeImages.intro}
+        imageAlt="Cruise experience for travel professionals"
+      />
 
       {/* Who We Are */}
       <section className="relative overflow-hidden border-y border-[var(--interlines-azure)]/10 bg-white/65 py-16 sm:py-24">
@@ -138,78 +136,27 @@ export default function HomePage() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-
-            <div className="mt-10 sm:mt-12">
-              <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--interlines-slate)] sm:mb-6 sm:text-xs sm:tracking-[0.2em]">
-                As a registered member, you can:
-              </p>
-              <div className="border-y border-[var(--interlines-azure)]/10">
-                {whoWeAreMemberActions.map((item, index) => (
-                  <div
-                    key={item}
-                    className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
-                      index !== 0 ? "border-t border-[var(--interlines-azure)]/10" : ""
-                    }`}
-                  >
-                    <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/70 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <p className="text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </Container>
       </section>
 
-      {/* Why Choose Us & Benefits */}
+      {/* Why Choose Us */}
       <section className="relative py-16 sm:py-24">
         <Container className="relative px-5 z-10">
           <div className="grid overflow-hidden rounded-[2rem_0_2rem_0] border border-[var(--interlines-azure)]/10 sm:rounded-[2.4rem_0_2.4rem_0] lg:grid-cols-[1fr_1fr] lg:rounded-[3rem_0_3rem_0]">
             <div className="bg-[linear-gradient(180deg,rgba(248,251,252,0.98),rgba(255,255,255,1))] px-5 py-8 sm:px-12 sm:py-14">
               <SectionTitle>Why Choose Us</SectionTitle>
-              <div className="mt-7 border-t border-[var(--interlines-azure)]/10 sm:mt-10">
-                {whyChooseUs.map((item, index) => (
-                  <div
-                    key={item}
-                    className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
-                      index !== 0 ? "border-t border-[var(--interlines-azure)]/10" : ""
-                    }`}
-                  >
-                    <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/75 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <p className="text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
-                      {item}
-                    </p>
-                  </div>
-                ))}
+              <div className="mt-7 space-y-5 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)] sm:mt-10 sm:space-y-6 sm:text-[16px]">
+                <p>{whyChooseUsParagraphs[0]}</p>
               </div>
             </div>
 
             <div className="relative overflow-hidden bg-[linear-gradient(160deg,rgba(36,88,96,1)_0%,rgba(48,117,128,0.96)_70%,rgba(64,145,156,0.92)_100%)] px-5 py-8 sm:px-12 sm:py-14">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_38%)]" />
               <div className="relative z-10">
-                <SectionTitle invert>Benefits for Travel Industry Professionals</SectionTitle>
-                <div className="mt-7 border-t border-white/12 sm:mt-10">
-                  {memberBenefits.map((item, index) => (
-                    <div
-                      key={item}
-                      className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
-                        index !== 0 ? "border-t border-white/12" : ""
-                      }`}
-                    >
-                      <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-gold-light)]/90 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <p className="text-[14px] leading-relaxed text-white/88 sm:text-[15px]">
-                        {item}
-                      </p>
-                    </div>
-                  ))}
+                <div className="space-y-5 pt-2 text-[15px] leading-relaxed text-white/88 sm:space-y-6 sm:text-[16px]">
+                  <p>{whyChooseUsParagraphs[1]}</p>
+                  <p className="text-[var(--interlines-gold-light)]">{whyChooseUsParagraphs[2]}</p>
                 </div>
               </div>
             </div>
@@ -218,26 +165,40 @@ export default function HomePage() {
       </section>
 
       {/* How it Works */}
-      <section className="relative overflow-hidden py-16 sm:py-24">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(232,242,244,0.6)_0%,rgba(250,250,250,0)_100%)]" />
-        <Container className="relative px-5 z-10">
+      <section className="relative overflow-hidden border-y border-[var(--interlines-gold-light)]/12 bg-[rgba(255,252,248,0.98)] py-16 sm:py-24">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--interlines-gold-light)]/22 to-transparent" />
+        <div className="pointer-events-none absolute left-[-8%] top-10 h-[21rem] w-[21rem] rounded-full bg-[var(--interlines-gold-light)]/10 blur-[120px]" />
+        <div className="pointer-events-none absolute right-[-10%] bottom-0 h-[24rem] w-[24rem] rounded-full bg-white/55 blur-[125px]" />
+
+        <Container className="relative z-10 px-5">
           <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
             <SectionTitle align="center">How the Programme Works</SectionTitle>
           </div>
 
-          <div className="border-y border-[var(--interlines-azure)]/12">
-            <div className="grid gap-px bg-[var(--interlines-azure)]/10 sm:grid-cols-2 xl:grid-cols-5">
+          <div className="relative">
+            <div className="grid gap-4 md:grid-cols-2 md:items-stretch md:gap-5 lg:grid-cols-4 lg:gap-4">
               {programmeSteps.map((step, index) => (
                 <article
                   key={step}
-                  className="flex items-start gap-4 bg-[var(--interlines-bg)]/90 px-5 py-6 backdrop-blur-sm sm:px-7 sm:py-8 xl:block xl:px-7 xl:py-10"
+                  className={cn(
+                    "home-reveal group relative h-full overflow-hidden rounded-[1.7rem] border border-[var(--interlines-azure)]/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.94)_0%,rgba(247,250,251,0.98)_100%)] p-5 shadow-[0_18px_48px_rgba(48,117,128,0.08)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_24px_56px_rgba(48,117,128,0.14)] sm:p-6 lg:px-5 lg:py-4 xl:px-6 xl:py-4",
+                  )}
+                  style={{ animationDelay: `${80 + index * 120}ms` }}
                 >
-                  <span className="block text-[1.8rem] font-semibold leading-none tabular-nums text-[var(--interlines-azure)] sm:text-[2.25rem] xl:text-[3rem]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <p className="mt-0.5 max-w-none text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px] xl:mt-6 xl:max-w-[22ch]">
-                    {step}
-                  </p>
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(48,117,128,0.08),transparent_42%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                  <div className="relative z-10 flex items-start gap-3.5 sm:gap-4 lg:flex-col lg:items-start lg:gap-3.5">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[0.95rem] border border-[var(--interlines-azure)]/16 bg-white text-[0.9rem] font-semibold tabular-nums text-[var(--interlines-azure)] shadow-[0_10px_24px_rgba(48,117,128,0.1)] sm:h-12 sm:w-12 sm:text-[0.95rem] lg:h-11 lg:w-11">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <div className="min-w-0 pt-1 lg:pt-0">
+                      <div className="mb-2.5 h-px w-12 bg-gradient-to-r from-[var(--interlines-gold-light)]/80 to-transparent lg:mb-2.5 lg:w-14" />
+                      <p className="max-w-[34rem] text-[15px] leading-relaxed text-[var(--interlines-slate)] sm:text-[17px] lg:max-w-none lg:text-[15px] lg:leading-7 xl:text-[16px]">
+                        {step}
+                      </p>
+                    </div>
+                  </div>
                 </article>
               ))}
             </div>
@@ -245,159 +206,61 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Eligibility & Offers */}
-      <section className="relative py-16 sm:py-24">
+      {/* Eligibility */}
+      <section className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,1)_0%,rgba(250,250,250,0.98)_100%)] py-16 sm:py-24">
+        <div className="pointer-events-none absolute left-[-6%] bottom-0 h-[20rem] w-[20rem] rounded-full bg-[var(--interlines-gold-light)]/10 blur-[120px]" />
+        <div className="pointer-events-none absolute right-[-8%] top-8 h-[24rem] w-[24rem] rounded-full bg-[var(--interlines-azure)]/7 blur-[135px]" />
         <Container className="px-5">
-          <div className="grid gap-10 xl:grid-cols-[0.92fr_1.08fr] xl:items-start xl:gap-14">
-            <div className="max-w-xl">
+          <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:gap-14">
+            <div className="max-w-xl lg:pr-4">
               <div className="mb-6 h-px w-14 bg-gradient-to-r from-[var(--interlines-azure)] to-transparent sm:mb-8 sm:w-16" />
               <SectionTitle>Who Is Eligible</SectionTitle>
               <p className="mt-6 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)] sm:mt-8 sm:text-[17px]">
-                You qualify if you are a current or former employee of a Middle East-based travel or hospitality organisation, including:
+                {homeEligibilityParagraph}
               </p>
 
-              <div className="mt-8 border-y border-[var(--interlines-azure)]/10 sm:mt-10">
-                {eligibleOrganisations.map((item, index) => (
-                  <div
-                    key={item}
-                    className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
-                      index !== 0 ? "border-t border-[var(--interlines-azure)]/10" : ""
-                    }`}
-                  >
-                    <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/75 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <p className="text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 border-l-2 border-[var(--interlines-gold)]/40 pl-5">
+              <div className="mt-8 border-l-2 border-[var(--interlines-gold)]/40 pl-5 sm:mt-10">
                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--interlines-slate)] sm:text-xs sm:tracking-[0.2em]">
                   Family Eligibility
                 </p>
                 <p className="mt-3 text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
-                  Spouse, children and parents may also travel at interline rates.
+                  {homeFamilyEligibilityParagraph}
                 </p>
               </div>
-            </div>
 
-            <div className="relative min-h-[26rem] overflow-hidden rounded-[0_2rem_0_2rem] shadow-[0_22px_60px_rgba(48,117,128,0.12)] sm:min-h-[32rem] sm:rounded-[0_2.5rem_0_2.5rem] xl:min-h-[35rem] xl:rounded-[0_3rem_0_3rem]">
-              <img
-                src={homeImages.offers}
-                alt="Cruise dining and onboard offers"
-                className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.28]"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,250,250,0.12)_0%,rgba(250,250,250,0.88)_40%,rgba(250,250,250,1)_100%)]" />
-
-              <div className="relative z-10 flex h-full flex-col justify-end p-6 sm:p-10 xl:p-12">
-                <SectionTitle>Current Cruise Offers</SectionTitle>
-                <p className="mt-4 text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
-                  New offers are added regularly across destinations and cruise lines.
-                </p>
-                <p className="mt-4 text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
-                  You may find:
-                </p>
-
-                <div className="mt-6 border-t border-[var(--interlines-azure)]/10 sm:mt-8">
-                  {currentCruiseOffers.map((item, index) => (
-                    <div
-                      key={item}
-                      className={`flex items-start gap-4 py-4 sm:gap-5 sm:py-5 ${
-                        index !== 0 ? "border-t border-[var(--interlines-azure)]/10" : ""
-                      }`}
-                    >
-                      <span className="pt-0.5 text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/75 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <p className="text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[15px]">
-                        {item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-10">
-                  <Pill href="/offers" variant="azure" className="w-full sm:w-auto">
-                    View Latest Offers
-                  </Pill>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="relative overflow-hidden border-y border-[var(--interlines-azure)]/10 bg-white/70 py-16 sm:py-24">
-        <div className="pointer-events-none absolute left-1/2 top-0 h-full w-[34rem] -translate-x-1/2 bg-gradient-to-b from-[var(--interlines-azure-light)]/45 to-transparent" />
-        <Container className="relative px-5">
-          <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-            <div className="max-w-md">
-              <div className="mb-6 h-px w-14 bg-gradient-to-r from-[var(--interlines-gold)] to-transparent sm:mb-8 sm:w-16" />
-              <SectionTitle>How to Register</SectionTitle>
-            </div>
-
-            <div className="grid gap-px bg-[var(--interlines-azure)]/10 sm:grid-cols-2 xl:grid-cols-4">
-              {registrationSteps.map((step, index) => (
-                <div key={step} className="bg-white/90 px-5 py-6 backdrop-blur-sm sm:px-6 sm:py-7">
-                  <span className="block text-[0.66rem] font-bold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/75 tabular-nums sm:text-[0.72rem] sm:tracking-[0.28em]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <p className="mt-4 text-[14px] leading-relaxed text-[var(--interlines-slate-soft)] sm:mt-5 sm:text-[15px]">
-                    {step}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-8 flex justify-stretch sm:mt-10 sm:justify-center">
-            <Pill href="/request-access" variant="azure" className="w-full sm:w-auto">
-              Register for Access
-            </Pill>
-          </div>
-        </Container>
-      </section>
-
-      {/* CTA Footer Section */}
-      <section className="relative pt-16 pb-12 sm:pt-24 sm:pb-20">
-        <Container className="px-5">
-          <div className="group isolate relative overflow-hidden rounded-[2.25rem] border border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure)] shadow-[0_30px_60px_rgba(48,117,128,0.15)] sm:rounded-[3rem]">
-            <img
-              src={homeImages.hero}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 h-full w-full object-cover object-[center_58%] opacity-[0.35] mix-blend-luminosity z-0 group-hover:scale-105 transition-transform duration-[3s]"
-            />
-            <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[var(--interlines-azure)] to-[var(--interlines-azure)]/40 z-10" />
-
-            <div className="relative z-20 max-w-4xl px-6 py-14 sm:p-24">
-              <h2 className="font-display text-[2.1rem] leading-[1.05] tracking-[-0.03em] text-white drop-shadow-md sm:text-[4.5rem]">
-                You&rsquo;ve spent your career helping others see the world.
-                <span className="block py-2 text-[var(--interlines-gold-light)] italic mt-3 sm:mt-4">
-                  Now it&rsquo;s your turn.
-                </span>
-              </h2>
-              <p className="mt-6 max-w-[48ch] text-base font-light leading-relaxed text-white/90 sm:mt-8 sm:text-[17px]">
-                Join Interline Cruises Middle East and access exclusive cruise rates reserved for the travel industry.
+              <p className="mt-8 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)] sm:mt-10 sm:text-[17px]">
+                {homeEligibilityClosing}
               </p>
-              <div className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row sm:flex-wrap sm:gap-5">
-                <Pill href="/request-access" variant="white" className="w-full sm:w-auto">
+
+              <div className="mt-8 flex justify-stretch sm:mt-10 sm:justify-start">
+                <Pill href="/request-access" variant="azure" className="w-full sm:w-auto">
                   Register Now
                 </Pill>
-                <Pill href="/login" variant="glass" className="w-full sm:w-auto">
-                  Log In
-                </Pill>
-                <Pill href="/offers" variant="glass" className="w-full sm:w-auto">
-                  Explore Cruise Offers
-                </Pill>
               </div>
+            </div>
+
+            <div className="relative min-h-[26rem] overflow-hidden rounded-[0_2rem_0_2rem] shadow-[0_22px_60px_rgba(48,117,128,0.12)] sm:min-h-[32rem] sm:rounded-[0_2.5rem_0_2.5rem] lg:min-h-[35rem] lg:rounded-[0_3rem_0_3rem]">
+              <img
+                src={homeImages.offers}
+                alt="Cruise holidays for the travel community"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--interlines-azure-deep)]/72 via-[var(--interlines-azure)]/16 to-transparent" />
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/16" />
             </div>
           </div>
         </Container>
       </section>
+
+      {/* Partner Cruise Lines and Offers */}
+      <CruiseLineShowcaseSection
+        title="Partner Cruise Lines and Offers"
+        paragraphs={homePartnerCruiseLinesParagraphs}
+        items={partnerCruiseLines}
+        kicker="Featured cruise lines include:"
+        ctaHref="/offers"
+        ctaLabel="View Offers"
+      />
     </div>
   );
 }

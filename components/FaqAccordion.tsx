@@ -125,10 +125,8 @@ export default function FaqAccordion() {
             key={item.question}
             question={item.question}
             paragraphs={item.paragraphs}
-            listItems={"listItems" in item ? item.listItems : undefined}
-            afterListParagraphs={
-              "afterListParagraphs" in item ? item.afterListParagraphs : undefined
-            }
+            listItems={item.listItems}
+            afterListParagraphs={item.afterListParagraphs}
             open={openIndex === index}
             onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
             panelId={`${id}-panel-${index}`}

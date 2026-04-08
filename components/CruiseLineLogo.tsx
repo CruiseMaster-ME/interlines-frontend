@@ -37,7 +37,7 @@ export default function CruiseLineLogo({
             <ImageIcon className="h-6 w-6" />
           </span>
           <p className="mt-4 font-display text-[1.35rem] leading-tight tracking-[-0.02em] text-[var(--interlines-slate)]">
-            Image Coming Soon
+            Logo not available
           </p>
         </div>
       )}

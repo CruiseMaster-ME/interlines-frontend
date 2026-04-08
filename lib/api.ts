@@ -53,6 +53,75 @@ export type ApiAdminManagedUser = {
   approved_at: string | null;
 };
 
+export type ApiCruiseLine = {
+  id: number;
+  slug: string;
+  name: string;
+  logo_path: string | null;
+  hero_image_path: string | null;
+  is_active: boolean;
+  sort_order: number;
+};
+
+export type ApiOfferTheme = {
+  primary_color: string | null;
+  accent_color: string | null;
+  text_color: string | null;
+};
+
+export type ApiOfferSailing = {
+  id: number;
+  slug: string;
+  ship_name: string;
+  sailing_date: string | null;
+  departure_ports: string | null;
+  nights: number | null;
+  ports_of_call: string | null;
+  sailing_period: string | null;
+  availability_label: string | null;
+  booking_engine_url: string | null;
+  booking_url: string | null;
+  is_active: boolean;
+  sort_order: number;
+};
+
+export type ApiOfferGalleryImage = {
+  id: number;
+  image_path: string;
+  image_alt: string | null;
+  caption: string | null;
+  sort_order: number;
+};
+
+export type ApiOffer = {
+  id: number;
+  cruise_line_id: number;
+  slug: string;
+  title: string;
+  summary: string | null;
+  departure_ports: string | null;
+  travel_window: string | null;
+  valid_from: string | null;
+  valid_until: string | null;
+  hero_tagline: string | null;
+  hero_image_path: string | null;
+  hero_image_alt: string | null;
+  theme_primary_color: string | null;
+  theme_accent_color: string | null;
+  theme_text_color: string | null;
+  terms_note: string | null;
+  booking_label: string | null;
+  booking_url: string | null;
+  starts_on: string | null;
+  ends_on: string | null;
+  is_published: boolean;
+  published_at: string | null;
+  sort_order: number;
+  cruise_line?: ApiCruiseLine;
+  sailings?: ApiOfferSailing[];
+  gallery_images?: ApiOfferGalleryImage[];
+};
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }

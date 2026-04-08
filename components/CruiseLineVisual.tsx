@@ -1,3 +1,4 @@
+import { ImageIcon } from "lucide-react";
 import Image from "next/image";
 import CruiseLineLogo from "@/components/CruiseLineLogo";
 import type { CruiseLine } from "@/lib/siteContent";
@@ -31,6 +32,7 @@ export default function CruiseLineVisual({
 }: CruiseLineVisualProps) {
   const visualSrc = line.imageSrc;
   const visualAlt = line.imageAlt;
+  const hasVisual = Boolean(visualSrc);
 
   const foregroundImageClassName =
     variant === "card"
@@ -48,7 +50,7 @@ export default function CruiseLineVisual({
         className,
       )}
     >
-      {visualSrc ? (
+      {hasVisual ? (
         <>
           {variant === "card" ? (
             <Image
@@ -76,6 +78,21 @@ export default function CruiseLineVisual({
             </div>
           </div>
         </>
+      ) : variant === "detail" ? (
+        <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(145deg,rgba(234,244,245,0.95)_0%,rgba(255,255,255,1)_100%)]">
+          <div className="flex flex-col items-center justify-center px-6 text-center">
+            {line.logoSrc ? (
+              <CruiseLineLogo line={line} variant="detail" />
+            ) : (
+              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--interlines-azure)]/8 text-[var(--interlines-azure)]">
+                <ImageIcon className="h-7 w-7" />
+              </span>
+            )}
+            <p className="mt-5 text-[12px] font-semibold uppercase tracking-[0.2em] text-[var(--interlines-azure)]/72 sm:text-[13px]">
+              Image not available
+            </p>
+          </div>
+        </div>
       ) : null}
 
       {variant === "card" ? (
@@ -91,6 +108,12 @@ export default function CruiseLineVisual({
           >
             <CruiseLineLogo line={line} variant="card" />
           </div>
+
+          {!hasVisual ? (
+            <div className="absolute bottom-3 left-3 rounded-full border border-white/16 bg-[var(--interlines-azure-deep)]/82 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/78 shadow-[0_10px_24px_rgba(8,20,24,0.2)] sm:bottom-4 sm:left-4">
+              Image not available
+            </div>
+          ) : null}
         </>
       ) : (
         null

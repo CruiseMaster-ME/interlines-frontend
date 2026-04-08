@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import DashboardClient from "@/app/dashboard/DashboardClient";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Your Interline Cruises Middle East member dashboard.",
+  title: "Profile",
+  description: "Manage your Interline Cruises Middle East member profile and travel details.",
 };
 
 export default function DashboardPage() {

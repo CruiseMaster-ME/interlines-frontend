@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { cruiseLines } from "@/lib/siteContent";
 
 const routeLabels: Record<string, string> = {
-  offers: "Special Offers",
+  about: "About Us",
+  offers: "Cruise Offers",
   "cruise-lines": "Cruise Lines",
   faq: "FAQ",
   eligibility: "Eligibility",

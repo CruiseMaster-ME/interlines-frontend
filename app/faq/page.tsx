@@ -6,7 +6,7 @@ import { Pill } from "@/components/PremiumUI";
 
 export const metadata: Metadata = {
   title: "FAQ - Interline Cruises Middle East",
-  description: "Everything you need to know about accessing exclusive interline cruise rates.",
+  description: "Everything you need to know about accessing exclusive cruise rates.",
 };
 
 export default function FaqPage() {
@@ -14,6 +14,8 @@ export default function FaqPage() {
     <div className="bg-[var(--interlines-bg)] min-h-screen pb-24">
       <PageHeader
         title="How Interline Cruises Middle East Works"
+        backgroundImage="/assets/images/how.png"
+        backgroundPosition="center 34%"
       >
         <div className="space-y-6">
           <p>Everything you need to know about accessing exclusive cruise rates.</p>

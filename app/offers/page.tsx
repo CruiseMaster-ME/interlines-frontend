@@ -1,44 +1,48 @@
 import type { Metadata } from "next";
 import Container from "@/components/Container";
+import CruiseOfferCard from "@/components/CruiseOfferCard";
 import { PageHeader } from "@/components/PageHeader";
-import { currentCruiseOffers } from "@/lib/siteContent";
+import { NO_ACTIVE_OFFERS_MESSAGE, getCruiseOffers } from "@/lib/offers";
 
 export const metadata: Metadata = {
-  title: "Cruise Offers - Interline Cruises Middle East",
-  description: "Browse the latest interline cruise offers available to verified members.",
+  title: "Cruise Offers",
+  description: "Browse the latest cruise offers across all cruise lines.",
 };
 
-export default function OffersPage() {
+export default async function OffersPage() {
+  const offers = await getCruiseOffers();
+
   return (
     <div className="bg-[var(--interlines-bg)] min-h-screen pb-24">
-      <PageHeader title="Current Cruise Offers" balanced />
+      <PageHeader
+        title="Current Cruise Offers"
+        backgroundImage="/assets/images/cruise-offers.jpg"
+        backgroundPosition="center 56%"
+        balanced
+      />
 
-      <Container className="max-w-4xl px-5 pt-16 sm:pt-20">
-        <section className="rounded-[2.5rem] border border-[var(--interlines-azure)]/10 bg-white p-8 shadow-[0_15px_50px_rgba(48,117,128,0.06)] sm:p-14">
-          <p className="text-[17px] leading-relaxed text-[var(--interlines-slate-soft)]">
-            New offers are added regularly across destinations and cruise lines.
-          </p>
-          <p className="mt-6 text-[17px] leading-relaxed text-[var(--interlines-slate-soft)]">
-            You may find:
+      <Container className="max-w-6xl px-5 pt-10 sm:pt-12">
+        <section className="rounded-[2rem] border border-[var(--interlines-azure)]/10 bg-white p-6 shadow-[0_15px_40px_rgba(48,117,128,0.06)] sm:p-8">
+          <p className="border-b border-[var(--interlines-azure)]/10 pb-6 text-[15px] leading-8 text-[var(--interlines-slate-soft)] sm:text-[16px]">
+            {offers.length > 0
+              ? "Browse cruise offers across all cruise lines."
+              : NO_ACTIVE_OFFERS_MESSAGE}
           </p>
 
-          <div className="mt-8 border-y border-[var(--interlines-azure)]/10">
-            {currentCruiseOffers.map((offer, index) => (
-              <div
-                key={offer}
-                className={`flex items-start gap-5 py-5 ${
-                  index !== 0 ? "border-t border-[var(--interlines-azure)]/10" : ""
-                }`}
-              >
-                <span className="pt-0.5 text-[0.72rem] font-bold uppercase tracking-[0.28em] text-[var(--interlines-azure)]/75 tabular-nums">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <p className="text-[15px] leading-relaxed text-[var(--interlines-slate-soft)]">
-                  {offer}
-                </p>
-              </div>
-            ))}
-          </div>
+          {offers.length > 0 ? (
+            <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {offers.map((offer) => (
+                <CruiseOfferCard
+                  key={`${offer.cruiseLineSlug}-${offer.slug}`}
+                  offer={offer}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 rounded-[1.5rem] border border-dashed border-[var(--interlines-gold)]/30 bg-[rgba(255,253,248,0.78)] px-6 py-10 text-center text-[15px] leading-7 text-[var(--interlines-slate-soft)]">
+              {NO_ACTIVE_OFFERS_MESSAGE}
+            </div>
+          )}
         </section>
       </Container>
     </div>

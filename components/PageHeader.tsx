@@ -4,14 +4,18 @@ import Container from "@/components/Container";
 
 export function PageHeader({
   title,
-  subtitle,
   children,
   balanced = false,
+  backgroundImage,
+  backgroundPosition = "center center",
+  showBreadcrumbs = true,
 }: {
   title: React.ReactNode;
-  subtitle?: string;
   children?: React.ReactNode;
   balanced?: boolean;
+  backgroundImage?: string;
+  backgroundPosition?: string;
+  showBreadcrumbs?: boolean;
 }) {
   const isBalanced = balanced || !children;
 
@@ -19,28 +23,34 @@ export function PageHeader({
     <div
       className={
         isBalanced
-          ? "relative isolate overflow-hidden border-b border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure)] py-16 text-center sm:py-20 lg:py-24"
-          : "relative isolate overflow-hidden border-b border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure)] pt-20 pb-12 text-center sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-20"
+          ? "relative isolate overflow-hidden border-b border-white/10 bg-[var(--interlines-azure-deep)] pt-28 pb-16 text-center sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24"
+          : "relative isolate overflow-hidden border-b border-white/10 bg-[var(--interlines-azure-deep)] pt-28 pb-14 text-center sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20"
       }
     >
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/15 via-[var(--interlines-azure)]/90 to-[var(--interlines-azure)]" />
-        <div className="absolute left-[8%] top-[-18%] z-0 h-[420px] w-[420px] rounded-full bg-white/10 blur-[96px] pointer-events-none" />
-        <div className="absolute right-[8%] bottom-[-18%] z-0 h-[240px] w-[240px] rounded-full bg-[var(--interlines-gold)]/20 blur-[72px] pointer-events-none" />
+        {backgroundImage ? (
+          <div
+            className="absolute inset-0 scale-[1.04] bg-cover bg-no-repeat opacity-[0.76]"
+            style={{
+              backgroundImage: `url(${backgroundImage})`,
+              backgroundPosition,
+            }}
+          />
+        ) : null}
+        <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(36,88,96,0.94)_0%,rgba(48,117,128,0.76)_32%,rgba(36,88,96,0.34)_62%,rgba(36,88,96,0.12)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--interlines-azure-deep)]/86 via-[var(--interlines-azure-deep)]/26 to-transparent" />
+        <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-[var(--interlines-azure-deep)]/94 via-[var(--interlines-azure)]/54 to-transparent sm:w-[86%] lg:w-[54%]" />
+        <div className="absolute left-[-8%] top-[8%] h-[320px] w-[320px] rounded-full bg-white/10 blur-[90px] pointer-events-none sm:h-[460px] sm:w-[460px] sm:blur-[120px]" />
+        <div className="absolute right-[-8%] bottom-[-12%] h-[260px] w-[260px] rounded-full bg-[var(--interlines-gold)]/18 blur-[84px] pointer-events-none sm:h-[360px] sm:w-[360px] sm:blur-[110px]" />
       </div>
 
       <Container className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-5">
-        <Breadcrumbs />
-        {subtitle && (
-          <span className="mb-4 text-[11px] font-bold uppercase tracking-[0.26em] text-[var(--interlines-gold-light)] drop-shadow-sm sm:mb-5 sm:text-xs">
-            {subtitle}
-          </span>
-        )}
+        {showBreadcrumbs ? <Breadcrumbs /> : null}
         <h1 className="font-display text-[2.75rem] leading-[1.02] tracking-[-0.03em] text-white drop-shadow-md sm:text-[4rem] lg:text-[4.75rem]">
           {title}
         </h1>
         {children && (
-          <div className="mx-auto mt-8 max-w-2xl rounded-[1.75rem] border border-white/20 bg-white/10 px-6 py-4 text-base font-light leading-relaxed text-white/95 shadow-inner backdrop-blur-md sm:mt-9 sm:px-8 sm:py-5 sm:text-lg">
+          <div className="mx-auto mt-8 max-w-2xl rounded-[1.75rem] border border-white/16 bg-white/10 px-6 py-4 text-base font-light leading-relaxed text-white/95 shadow-[0_18px_50px_rgba(8,20,24,0.16)] backdrop-blur-md sm:mt-9 sm:px-8 sm:py-5 sm:text-lg">
             {children}
           </div>
         )}

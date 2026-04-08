@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "@/components/Container";
+import MemberSectionNav from "@/components/MemberSectionNav";
 import { Card } from "@/components/PremiumUI";
 import { useSessionContext } from "@/components/SessionProvider";
 import { apiGet, apiPatch, ApiUser } from "@/lib/api";
@@ -173,7 +174,9 @@ export default function DashboardClient() {
   return (
     <div className="bg-[var(--interlines-bg)] min-h-screen pb-24">
       <Container className="max-w-6xl px-5 pt-10 sm:pt-12">
-        <div className="grid gap-8 xl:grid-cols-[0.92fr_1.08fr]">
+        <MemberSectionNav />
+
+        <div className="mt-8 grid gap-8 xl:grid-cols-[0.92fr_1.08fr]">
           <Card className="border border-[var(--interlines-azure)]/10 bg-white/80 p-8 shadow-[0_20px_50px_rgba(48,117,128,0.06)] backdrop-blur-md sm:p-10">
             {loading ? (
               <div className="flex flex-col items-center justify-center py-20 text-[var(--interlines-azure)]">
