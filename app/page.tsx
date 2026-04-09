@@ -5,6 +5,7 @@ import { Mouse } from "lucide-react";
 import Container from "@/components/Container";
 import CruiseLineShowcaseSection from "@/components/CruiseLineShowcaseSection";
 import IntroSplitSection from "@/components/IntroSplitSection";
+import StructuredDataScript from "@/components/StructuredDataScript";
 import {
   homeEligibilityClosing,
   homeEligibilityParagraph,
@@ -17,13 +18,19 @@ import {
   whoWeAreParagraphs,
   whyChooseUsParagraphs,
 } from "@/lib/siteContent";
+import { buildPageMetadata, buildWebPageStructuredData } from "@/lib/seo";
 import { cn } from "@/lib/ui";
 
-export const metadata: Metadata = {
-  title: "Home",
-  description:
-    "Exclusive discounted cruise fares for airline, travel, tourism and hospitality professionals across the Middle East.",
-};
+const HOME_TITLE = "Set Sail. This Time, It's Your Turn.";
+const HOME_DESCRIPTION =
+  "Exclusive discounted cruise fares for airline, travel, tourism and hospitality professionals across the Middle East.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  path: "/",
+  image: "/assets/images/hero-bg.jpg",
+});
 
 const homeImages = {
   hero: "/assets/images/hero-bg.jpg",
@@ -47,6 +54,15 @@ export default function HomePage() {
 
   return (
     <div className="bg-[var(--interlines-bg)] text-[var(--interlines-slate-soft)] selection:bg-[var(--interlines-azure)]/20 selection:text-[var(--interlines-azure-deep)] w-full overflow-hidden">
+      <StructuredDataScript
+        data={buildWebPageStructuredData({
+          name: HOME_TITLE,
+          description: HOME_DESCRIPTION,
+          path: "/",
+          image: "/assets/images/hero-bg.jpg",
+        })}
+      />
+
       {/* Hero Section */}
       <section className="relative isolate flex h-[100svh] min-h-[100svh] items-center overflow-hidden pt-16 sm:pt-20">
         <div className="absolute inset-0 z-0 bg-[var(--interlines-azure-deep)]">
@@ -68,7 +84,8 @@ export default function HomePage() {
         <Container className="relative z-10 w-full px-5 pt-6 pb-24 sm:pt-20 sm:pb-32">
           <div className="home-reveal max-w-xl sm:max-w-2xl" style={{ animationDelay: "200ms" }}>
             <h1 className="font-display text-[2.9rem] leading-[1.02] tracking-[-0.03em] text-white sm:text-[5.2rem] lg:text-[7rem] drop-shadow-[0_8px_40px_rgba(16,24,40,0.22)]">
-              Set Sail. This Time,
+              Set Sail.{" "}
+              <span className="whitespace-nowrap">This Time,</span>
               <span className="block pr-1 text-[var(--interlines-gold-light)] italic sm:pr-4">
                 It&apos;s Your Turn.
               </span>

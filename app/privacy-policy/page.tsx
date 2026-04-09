@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import CompactBreadcrumbs from "@/components/CompactBreadcrumbs";
 import Container from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { CheckList, Card, Pill } from "@/components/PremiumUI";
+import StructuredDataScript from "@/components/StructuredDataScript";
+import {
+  buildBreadcrumbStructuredData,
+  buildPageMetadata,
+  buildWebPageStructuredData,
+} from "@/lib/seo";
 import { privacyContactEmail } from "@/lib/siteContent";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy - Interline Cruises Middle East",
-  description: "Secure, transparent and responsible use of your information at every step.",
-};
+const PRIVACY_POLICY_TITLE = "Privacy Policy";
+const PRIVACY_POLICY_DESCRIPTION =
+  "Secure, transparent and responsible use of your information at every step.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PRIVACY_POLICY_TITLE,
+  description: PRIVACY_POLICY_DESCRIPTION,
+  path: "/privacy-policy",
+  image: "/assets/images/hero-bg.jpg",
+});
 
 function PrivacySection({
   title,
@@ -99,25 +112,63 @@ function PrivacyTable() {
 }
 
 export default function PrivacyPolicyPage() {
+  const breadcrumbItems = [
+    { href: "/", label: "Home" },
+    { label: "Privacy Policy" },
+  ];
+  const breadcrumbStructuredData = buildBreadcrumbStructuredData(
+    [
+      { name: "Home", path: "/" },
+      { name: "Privacy Policy", path: "/privacy-policy/" },
+    ],
+    "/privacy-policy/",
+  );
+
   return (
     <div className="bg-[var(--interlines-bg)] min-h-screen pb-24">
+      <StructuredDataScript
+        data={
+          breadcrumbStructuredData
+            ? [
+                buildWebPageStructuredData({
+                  name: PRIVACY_POLICY_TITLE,
+                  description: PRIVACY_POLICY_DESCRIPTION,
+                  path: "/privacy-policy/",
+                  image: "/assets/images/hero-bg.jpg",
+                }),
+                breadcrumbStructuredData,
+              ]
+            : buildWebPageStructuredData({
+                name: PRIVACY_POLICY_TITLE,
+                description: PRIVACY_POLICY_DESCRIPTION,
+                path: "/privacy-policy/",
+                image: "/assets/images/hero-bg.jpg",
+              })
+        }
+      />
+
       <PageHeader
         title="Your Data, Handled with Care"
         backgroundImage="/assets/images/hero-bg.jpg"
         backgroundPosition="center 52%"
-      >
-        <div className="space-y-5">
-          <p>Secure, transparent and responsible use of your information at every step.</p>
-          <div>
-            <Pill href="/request-access" variant="white">
-              Register Now
-            </Pill>
-          </div>
-        </div>
-      </PageHeader>
+        showBreadcrumbs={false}
+        className="min-h-[17rem] sm:min-h-[20.5rem] lg:min-h-[24rem]"
+      />
 
-      <Container className="max-w-4xl px-5 pt-16 sm:pt-20">
+      <Container className="max-w-4xl px-5 pt-10 sm:pt-12">
         <Card className="border border-[var(--interlines-azure)]/5 bg-white/70 p-8 shadow-[0_20px_60px_rgba(48,117,128,0.06)] backdrop-blur-md sm:p-14">
+          <div className="mb-12 border-b border-[var(--interlines-azure)]/10 pb-12">
+            <CompactBreadcrumbs items={breadcrumbItems} />
+            <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/78">
+              Secure, transparent and responsible use of your information at every step.
+            </p>
+            <div className="mt-6">
+              <Pill href="/request-access" variant="azure">
+                Register Now
+              </Pill>
+            </div>
+          </div>
+
           <PrivacySection title="Your privacy matters.">
             <p>
               Your privacy matters. At Interline Cruises Middle East, we are

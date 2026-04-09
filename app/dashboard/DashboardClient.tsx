@@ -1,8 +1,6 @@
 "use client";
 
 import Container from "@/components/Container";
-import MemberSectionNav from "@/components/MemberSectionNav";
-import { Card } from "@/components/PremiumUI";
 import { useSessionContext } from "@/components/SessionProvider";
 import { apiGet, apiPatch, ApiUser } from "@/lib/api";
 import { useRouter } from "next/navigation";
@@ -34,19 +32,6 @@ const genderOptions = [
   { value: "U", label: "Prefer not to say" },
 ] as const;
 
-const missingFieldLabels: Record<string, string> = {
-  title: "title",
-  gender: "gender",
-  date_of_birth: "date of birth",
-  phone_country_code: "phone country code",
-  phone_number: "phone number",
-  address_line_1: "address line 1",
-  city: "city",
-  country: "country",
-  state: "state",
-  postal_code: "postal code",
-};
-
 function createProfileForm(user: ApiUser): ProfileForm {
   return {
     first_name: user.first_name,
@@ -66,12 +51,6 @@ function createProfileForm(user: ApiUser): ProfileForm {
     country: user.country ?? "",
     postal_code: user.postal_code ?? "",
   };
-}
-
-function describeMissingFields(fields: string[]) {
-  return fields
-    .map((field) => missingFieldLabels[field] ?? field.replaceAll("_", " "))
-    .join(", ");
 }
 
 function ProfileInput({
@@ -173,121 +152,18 @@ export default function DashboardClient() {
 
   return (
     <div className="bg-[var(--interlines-bg)] min-h-screen pb-24">
-      <Container className="max-w-6xl px-5 pt-10 sm:pt-12">
-        <MemberSectionNav />
-
-        <div className="mt-8 grid gap-8 xl:grid-cols-[0.92fr_1.08fr]">
-          <Card className="border border-[var(--interlines-azure)]/10 bg-white/80 p-8 shadow-[0_20px_50px_rgba(48,117,128,0.06)] backdrop-blur-md sm:p-10">
-            {loading ? (
-              <div className="flex flex-col items-center justify-center py-20 text-[var(--interlines-azure)]">
-                <svg className="mb-4 h-10 w-10 animate-spin opacity-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                </svg>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em]">
-                  Loading Profile...
-                </p>
-              </div>
-            ) : user ? (
-              <div className="space-y-8">
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--interlines-azure)]">
-                      Verification Status
-                    </p>
-                    <div
-                      className="inline-flex items-center gap-2 rounded-full border border-current px-3 py-1 font-semibold text-sm uppercase tracking-wider"
-                      style={{
-                        color:
-                          user.status === "APPROVED"
-                            ? "#10b981"
-                            : user.status === "PENDING"
-                              ? "#f59e0b"
-                              : "#ef4444",
-                        backgroundColor:
-                          user.status === "APPROVED"
-                            ? "rgba(16, 185, 129, 0.1)"
-                            : user.status === "PENDING"
-                              ? "rgba(245, 158, 11, 0.1)"
-                              : "rgba(239, 68, 68, 0.1)",
-                      }}
-                    >
-                      <span className="h-2 w-2 rounded-full bg-current" />
-                      {user.status}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--interlines-azure)]">
-                      Access Level
-                    </p>
-                    <p className="text-[1.15rem] font-medium text-[var(--interlines-slate)] capitalize">
-                      {user.role} Member
-                    </p>
-                  </div>
-                </div>
-
-                <div className="rounded-[2rem] border border-[var(--interlines-azure)]/10 bg-[var(--interlines-azure-light)]/35 p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--interlines-azure)]">
-                    Booking Profile
-                  </p>
-                  <h3 className="mt-3 font-display text-[1.8rem] leading-tight text-[var(--interlines-slate)]">
-                    {user.booking_profile_ready ? "Ready for Booking" : "Needs Attention"}
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)]">
-                    {user.booking_profile_ready
-                      ? "Your core travel details are in place and will be included in the Odysseus handoff."
-                      : `Complete the remaining travel details to reduce manual re-entry during booking: ${describeMissingFields(user.booking_profile_missing_fields)}.`}
-                  </p>
-                </div>
-
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <div className="rounded-[1.75rem] border border-[var(--interlines-azure)]/10 p-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--interlines-azure)]">
-                      Member Name
-                    </p>
-                    <p className="mt-3 text-[1.15rem] font-medium text-[var(--interlines-slate)]">
-                      {[user.first_name, user.middle_name, user.last_name]
-                        .filter(Boolean)
-                        .join(" ")}
-                    </p>
-                  </div>
-                  <div className="rounded-[1.75rem] border border-[var(--interlines-azure)]/10 p-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--interlines-azure)]">
-                      Email Address
-                    </p>
-                    <p className="mt-3 break-all text-[1.15rem] font-medium text-[var(--interlines-slate)]">
-                      {user.email}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="rounded-[1.75rem] border border-dashed border-[var(--interlines-azure)]/20 bg-white/60 p-5 text-sm leading-relaxed text-[var(--interlines-slate-soft)]">
-                  Password changes now flow through the secure reset email process from the login screen.
-                </div>
-              </div>
-            ) : (
-              <div className="py-10 text-center">
-                <p className="text-[15px] text-[var(--interlines-slate-soft)]">
-                  Authentication error.
-                </p>
-              </div>
-            )}
-          </Card>
-
-          <Card className="border border-[var(--interlines-azure)]/10 bg-white/80 p-8 shadow-[0_20px_50px_rgba(48,117,128,0.06)] backdrop-blur-md sm:p-10">
-            <div className="mb-8">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--interlines-azure)]">
-                Travel Profile
-              </p>
-              <h3 className="mt-3 font-display text-[2rem] leading-tight text-[var(--interlines-slate)]">
-                Passenger Details
-              </h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)]">
-                These details remain in your member account and are used to prefill the Odysseus booking session.
-              </p>
+      <Container className="max-w-5xl px-5 pt-10 sm:pt-12">
+        <div className="rounded-[1.75rem] border border-[var(--interlines-azure)]/10 bg-white/80 p-8 shadow-[0_20px_50px_rgba(48,117,128,0.06)] backdrop-blur-md sm:p-10">
+          {loading ? (
+            <div className="py-12 text-sm text-[var(--interlines-slate-soft)]">
+              Loading profile...
             </div>
-
+          ) : !user ? (
+            <div className="py-12 text-sm text-[var(--interlines-slate-soft)]">
+              Authentication error.
+            </div>
+          ) : (
+            <>
             {success && (
               <div className="mb-6 rounded-xl border border-emerald-200 bg-emerald-50/80 px-4 py-3 text-sm text-emerald-800">
                 {success}
@@ -486,7 +362,8 @@ export default function DashboardClient() {
                 Loading editable profile...
               </div>
             )}
-          </Card>
+            </>
+          )}
         </div>
       </Container>
     </div>

@@ -6,15 +6,21 @@ export function SectionTitle({
   highlight,
   align = "left",
   invert = false,
+  className = "",
+  sizeClassName,
 }: {
   children: React.ReactNode;
   highlight?: string;
   align?: "left" | "center";
   invert?: boolean;
+  className?: string;
+  sizeClassName?: string;
 }) {
   return (
     <div className={`mb-6 ${align === "center" ? "text-center mx-auto" : ""}`}>
-      <h2 className={`font-display text-[1.95rem] leading-[1.08] tracking-[-0.03em] sm:text-[2.45rem] lg:text-[3rem] ${invert ? "text-white" : "text-[var(--interlines-slate)]"}`}>
+      <h2
+        className={`font-display ${sizeClassName ?? "text-[1.95rem] leading-[1.08] tracking-[-0.03em] sm:text-[2.45rem] lg:text-[3rem]"} ${invert ? "text-white" : "text-[var(--interlines-slate)]"} ${className}`}
+      >
         {children}
       </h2>
       {highlight && (

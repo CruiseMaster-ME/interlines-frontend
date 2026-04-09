@@ -1,0 +1,15 @@
+# Interline Cruises Middle East
+
+Interline Cruises Middle East is a cruise platform for verified airline, travel, tourism, and hospitality professionals across the Middle East.
+
+Public pages:
+- / - Homepage
+- /about/ - About Interline Cruises Middle East
+- /cruise-lines/ - Cruise lines directory
+- /offers/ - Current cruise offers
+- /faq/ - Frequently asked questions
+- /eligibility/ - Eligibility information
+- /terms-and-conditions/ - Terms of use and booking conditions
+- /privacy-policy/ - Privacy policy
+
+Private or restricted pages such as login, registration, booking, dashboard, cruise search, and admin routes should not be treated as public reference material.

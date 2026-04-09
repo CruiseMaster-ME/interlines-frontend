@@ -162,6 +162,41 @@ function normalizeText(value?: string | null) {
   return text ? text : null;
 }
 
+function currentDateKey() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function isDateOutsideValidityWindow(
+  value: string | null | undefined,
+  comparison: "<" | ">",
+  today = currentDateKey(),
+) {
+  if (!value) {
+    return false;
+  }
+
+  return comparison === "<" ? value < today : value > today;
+}
+
+function isRawOfferCurrentlyValid(raw: RawOffer) {
+  const today = currentDateKey();
+
+  if (isDateOutsideValidityWindow(raw.valid_until, "<", today)) {
+    return false;
+  }
+
+  if (isDateOutsideValidityWindow(raw.valid_from, ">", today)) {
+    return false;
+  }
+
+  return true;
+}
+
 function formatDisplayDate(value?: string | null) {
   if (!value) return null;
 
@@ -351,7 +386,21 @@ const fetchOfferDetailResponse = cache(async (slug: string, offerSlug: string) =
 export async function getCruiseOffers() {
   const response = await fetchAllOffersResponse();
 
-  return (response.offers ?? []).map(mapOffer).filter(hasDisplayableListingData);
+  return (response.offers ?? [])
+    .filter(isRawOfferCurrentlyValid)
+    .map(mapOffer)
+    .filter(hasDisplayableListingData);
+}
+
+export async function getCruiseOffersLive() {
+  const response = await fetchPublicJson<RawOffersResponse>("/api/offers", {
+    offers: [],
+  });
+
+  return (response.offers ?? [])
+    .filter(isRawOfferCurrentlyValid)
+    .map(mapOffer)
+    .filter(hasDisplayableListingData);
 }
 
 export async function getCruiseOfferPageSlugs(fallbackSlugs: string[] = []) {
@@ -384,6 +433,27 @@ export async function getCruiseOffersByLineSlug(
   return {
     cruiseLine: mapCruiseLine(response.cruise_line, slug),
     offers: (response.offers ?? [])
+      .filter(isRawOfferCurrentlyValid)
+      .map(mapOffer)
+      .filter(hasDisplayableListingData),
+  };
+}
+
+export async function getCruiseOffersByLineSlugLive(
+  slug: string,
+): Promise<CruiseLineOffersResult> {
+  const response = await fetchPublicJson<RawCruiseLineOffersResponse>(
+    `/api/cruise-lines/${slug}/offers`,
+    {
+      cruise_line: null,
+      offers: [],
+    },
+  );
+
+  return {
+    cruiseLine: mapCruiseLine(response.cruise_line, slug),
+    offers: (response.offers ?? [])
+      .filter(isRawOfferCurrentlyValid)
       .map(mapOffer)
       .filter(hasDisplayableListingData),
   };
@@ -397,12 +467,41 @@ export async function getCruiseOfferBySlugs(
 
   return {
     cruiseLine: mapCruiseLine(response.cruise_line, lineSlug),
-    offer: response.offer ? mapOffer(response.offer) : null,
+    offer:
+      response.offer && isRawOfferCurrentlyValid(response.offer)
+        ? mapOffer(response.offer)
+        : null,
+  };
+}
+
+export async function getCruiseOfferBySlugsLive(
+  lineSlug: string,
+  offerSlug: string,
+): Promise<CruiseOfferDetailResult> {
+  const response = await fetchPublicJson<RawOfferDetailResponse>(
+    `/api/cruise-lines/${lineSlug}/offers/${offerSlug}`,
+    {
+      cruise_line: null,
+      offer: null,
+    },
+  );
+
+  return {
+    cruiseLine: mapCruiseLine(response.cruise_line, lineSlug),
+    offer:
+      response.offer && isRawOfferCurrentlyValid(response.offer)
+        ? mapOffer(response.offer)
+        : null,
   };
 }
 
 export function getCruiseOfferHref(
   offer: Pick<CruiseOffer, "cruiseLineSlug" | "slug">,
 ) {
-  return `/cruise-lines/${offer.cruiseLineSlug}/offers/${offer.slug}`;
+  const searchParams = new URLSearchParams({
+    line: offer.cruiseLineSlug,
+    offer: offer.slug,
+  });
+
+  return `/offer-details/?${searchParams.toString()}`;
 }

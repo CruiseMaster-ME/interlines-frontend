@@ -1,6 +1,7 @@
 import { ImageIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getLogoSizeVars } from "@/lib/logoSizing";
 import { cn } from "@/lib/ui";
 
 export type CruiseLineLogoGridItem = {
@@ -33,20 +34,25 @@ function TileContent({ item }: { item: CruiseLineLogoGridItem }) {
     );
   }
 
+  const logoSizeVars = getLogoSizeVars(item.logoClassName, {
+    width: "7.8rem",
+    widthSm: "8.7rem",
+    height: "1.875rem",
+    heightSm: "2.125rem",
+  });
+
   return (
     <div className="flex w-full items-center justify-center">
       <div
-        className={cn(
-          "relative h-8 w-[8.1rem] origin-center sm:h-9 sm:w-[8.75rem]",
-          item.logoClassName,
-        )}
+        style={logoSizeVars}
+        className="relative h-[var(--logo-h)] w-[var(--logo-w)] origin-center sm:h-[var(--logo-h-sm)] sm:w-[var(--logo-w-sm)]"
       >
         <Image
           src={item.logoSrc}
           alt={item.logoAlt ?? `${item.name} logo`}
           fill
-          sizes="(min-width: 1280px) 9rem, (min-width: 640px) 8.75rem, 8.1rem"
-          className="object-contain opacity-[0.9] transition duration-300 group-hover:opacity-100"
+          sizes="(min-width: 1280px) 8.7rem, (min-width: 640px) 7.8rem, 7.8rem"
+          className="object-contain opacity-100 transition duration-300"
         />
       </div>
     </div>
@@ -71,7 +77,7 @@ export default function CruiseLineLogoGrid({
         {items.map((item) => {
           const sharedProps = {
             className: cn(
-              "group flex h-[6.25rem] w-[10.75rem] items-center justify-center rounded-[1.55rem] border border-[var(--interlines-azure)]/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(246,250,250,0.96)_100%)] px-4 py-3 shadow-[0_14px_32px_rgba(48,117,128,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--interlines-azure)]/30 hover:shadow-[0_20px_38px_rgba(48,117,128,0.14)] sm:h-[6.75rem] sm:w-[11.25rem]",
+              "group flex h-[7rem] w-[12rem] items-center justify-center rounded-[2rem] border border-[#d8e6ea] bg-[linear-gradient(180deg,rgba(255,255,255,0.985)_0%,rgba(252,253,253,0.98)_100%)] px-4 py-3.5 shadow-[0_14px_34px_rgba(173,197,204,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-[#cddde2] hover:shadow-[0_20px_42px_rgba(173,197,204,0.26)] sm:h-[7.35rem] sm:w-[12.45rem] sm:px-5",
               tileClassName,
             ),
             "aria-label": `Open ${item.name}`,

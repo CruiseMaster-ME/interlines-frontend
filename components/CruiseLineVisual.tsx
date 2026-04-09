@@ -30,21 +30,33 @@ export default function CruiseLineVisual({
   variant = "card",
   className,
 }: CruiseLineVisualProps) {
-  const visualSrc = line.imageSrc;
-  const visualAlt = line.imageAlt;
+  const visualSrc =
+    variant === "detail"
+      ? line.detailImageSrc || line.imageSrc
+      : line.imageSrc || line.detailImageSrc;
+  const visualAlt =
+    variant === "detail"
+      ? line.detailImageSrc
+        ? line.detailImageAlt
+        : line.imageAlt
+      : line.imageAlt;
   const hasVisual = Boolean(visualSrc);
+  const hasDedicatedDetailVisual =
+    variant === "detail" && Boolean(line.detailImageSrc);
 
   const foregroundImageClassName =
     variant === "card"
       ? "object-cover object-center transition-transform duration-[1.6s] group-hover:scale-[1.03]"
-      : "object-contain object-left-center";
+      : hasDedicatedDetailVisual
+        ? "object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
+        : "object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]";
 
   return (
     <div
       className={cn(
         "group relative isolate",
         variant === "detail"
-          ? "overflow-hidden rounded-[1.6rem] bg-white"
+          ? "overflow-hidden rounded-[1.45rem] border border-[var(--interlines-azure)]/10 bg-white shadow-[0_18px_36px_rgba(36,88,96,0.08)]"
           : "overflow-hidden rounded-[1.5rem] bg-[var(--interlines-azure-deep)]",
         containerHeights[variant],
         className,
@@ -77,6 +89,13 @@ export default function CruiseLineVisual({
               />
             </div>
           </div>
+
+          {variant === "detail" && hasDedicatedDetailVisual ? (
+            <>
+              <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-950/12 via-slate-950/5 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-950/16 via-slate-950/6 to-transparent" />
+            </>
+          ) : null}
         </>
       ) : variant === "detail" ? (
         <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(145deg,rgba(234,244,245,0.95)_0%,rgba(255,255,255,1)_100%)]">

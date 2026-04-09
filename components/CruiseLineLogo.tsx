@@ -1,5 +1,6 @@
 import { ImageIcon } from "lucide-react";
 import Image from "next/image";
+import { getLogoSizeVars } from "@/lib/logoSizing";
 import type { CruiseLine } from "@/lib/siteContent";
 import { cn } from "@/lib/ui";
 
@@ -9,20 +10,35 @@ type CruiseLineLogoProps = {
   className?: string;
 };
 
-const logoSizes = {
-  card: "h-[2rem] w-[6.4rem] sm:h-[2.25rem] sm:w-[7.25rem]",
-  detail: "h-[2.6rem] w-[8.35rem] sm:h-[2.95rem] sm:w-[9.4rem]",
-} as const;
-
 export default function CruiseLineLogo({
   line,
   variant = "card",
   className,
 }: CruiseLineLogoProps) {
+  const defaultLogoSizes =
+    variant === "detail"
+      ? {
+          width: "8.35rem",
+          widthSm: "9.4rem",
+          height: "2.6rem",
+          heightSm: "2.95rem",
+        }
+      : {
+          width: "6.4rem",
+          widthSm: "7.25rem",
+          height: "2rem",
+          heightSm: "2.25rem",
+        };
+
+  const logoSizeVars = getLogoSizeVars(line.logoClassName, defaultLogoSizes);
+
   return (
     <div className={cn("flex items-center justify-center", className)}>
       {line.logoSrc ? (
-        <div className={cn("relative origin-center", logoSizes[variant], line.logoClassName)}>
+        <div
+          style={logoSizeVars}
+          className="relative origin-center h-[var(--logo-h)] w-[var(--logo-w)] sm:h-[var(--logo-h-sm)] sm:w-[var(--logo-w-sm)]"
+        >
           <Image
             src={line.logoSrc}
             alt={line.logoAlt}

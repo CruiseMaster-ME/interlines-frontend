@@ -1,9 +1,19 @@
 import type { Metadata } from "next";
 import { Cinzel, Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./odysseus-option-10.css";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import SessionProvider from "@/components/SessionProvider";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  organizationStructuredData,
+  toAbsoluteUrl,
+  websiteStructuredData,
+} from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,18 +39,45 @@ const cinzel = Cinzel({
 
 export const metadata: Metadata = {
   title: {
-    default: "Interline Cruises Middle East",
-    template: "%s | Interline Cruises Middle East",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Exclusive cruise rates for verified Middle East travel and hospitality professionals, with registration, verification, and direct booking in one place.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://interlinecruisesme.com",
-  ),
-  icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+  description: SITE_DESCRIPTION,
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    siteName: SITE_NAME,
+    locale: "en_US",
+    images: [
+      {
+        url: toAbsoluteUrl(DEFAULT_OG_IMAGE),
+        alt: SITE_NAME,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: [toAbsoluteUrl(DEFAULT_OG_IMAGE)],
   },
 };
 
@@ -49,14 +86,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = [
+    organizationStructuredData,
+    websiteStructuredData,
+  ];
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${cormorantGaramond.variable} ${cinzel.variable} min-h-dvh bg-white text-zinc-900 antialiased`}
       >
         <SessionProvider>
           <div className="flex min-h-dvh flex-col">
-            <div className="site-header-shell">
+            <div className="site-header-shell sticky top-0 z-50">
               <SiteHeader />
             </div>
             <main className="site-main-shell flex-1">{children}</main>

@@ -8,6 +8,7 @@ import { cn } from "@/lib/ui";
 
 type CruiseLineShowcaseSectionProps = {
   title?: string;
+  titleClassName?: string;
   paragraphs: readonly string[];
   items: readonly CruiseLineLogoGridItem[];
   kicker?: string;
@@ -20,6 +21,7 @@ type CruiseLineShowcaseSectionProps = {
 
 export default function CruiseLineShowcaseSection({
   title,
+  titleClassName,
   paragraphs,
   items,
   kicker,
@@ -51,7 +53,9 @@ export default function CruiseLineShowcaseSection({
           </div>
 
           <div className="order-1 max-w-none lg:order-1 lg:max-w-xl">
-            {title ? <SectionTitle>{title}</SectionTitle> : null}
+            {title ? (
+              <SectionTitle sizeClassName={titleClassName}>{title}</SectionTitle>
+            ) : null}
             <div className={cn("space-y-5 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)] sm:text-[17px]", title ? "mt-6 sm:mt-8" : "")}>
               {paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

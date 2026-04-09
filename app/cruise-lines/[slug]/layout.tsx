@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { cruiseLines } from "@/lib/siteContent";
 
+export const dynamic = "force-static";
+
 export function generateStaticParams() {
   return cruiseLines.map((line) => ({
     slug: line.slug,

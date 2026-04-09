@@ -48,6 +48,10 @@ export default function AdminShell({
   const isLoginRoute = normalizedPathname === "/admin/login";
   const loading = !isLoginRoute && status === "loading";
   const loginHref = "/admin/login";
+  const adminActionClassName =
+    "inline-flex h-10 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-[var(--interlines-slate)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--interlines-azure)]/24 hover:bg-[var(--interlines-azure-light)]/70 hover:text-[var(--interlines-azure-deep)] hover:shadow-[0_12px_24px_rgba(36,88,96,0.1)]";
+  const adminSidebarActionClassName =
+    "inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-semibold text-[var(--interlines-slate)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--interlines-azure)]/24 hover:bg-[var(--interlines-azure-light)]/70 hover:text-[var(--interlines-azure-deep)] hover:shadow-[0_12px_24px_rgba(36,88,96,0.1)]";
 
   useEffect(() => {
     if (isLoginRoute || status === "loading" || status === "admin") {
@@ -90,39 +94,11 @@ export default function AdminShell({
   }
 
   if (!isLoginRoute && loading) {
-    return (
-      <AdminContext.Provider value={contextValue}>
-        <AdminBodyClass />
-        <div className="flex h-dvh items-center justify-center bg-[var(--interlines-bg)] px-5">
-          <div className="w-full max-w-md rounded-[1.75rem] border border-slate-200 bg-white px-8 py-7 text-center shadow-[0_18px_48px_rgba(15,23,42,0.06)]">
-            <h1 className="font-display text-[2rem] leading-tight text-[var(--interlines-slate)]">
-              Loading
-            </h1>
-            <p className="mt-2 text-sm text-[var(--interlines-slate-soft)]">
-              Checking your session.
-            </p>
-          </div>
-        </div>
-      </AdminContext.Provider>
-    );
+    return null;
   }
 
   if (!isLoginRoute && status !== "admin") {
-    return (
-      <AdminContext.Provider value={contextValue}>
-        <AdminBodyClass />
-        <div className="flex h-dvh items-center justify-center bg-[var(--interlines-bg)] px-5">
-          <div className="w-full max-w-md rounded-[1.75rem] border border-slate-200 bg-white px-8 py-7 text-center shadow-[0_18px_48px_rgba(15,23,42,0.06)]">
-            <h1 className="font-display text-[2rem] leading-tight text-[var(--interlines-slate)]">
-              Redirecting
-            </h1>
-            <p className="mt-2 text-sm text-[var(--interlines-slate-soft)]">
-              Returning to sign in.
-            </p>
-          </div>
-        </div>
-      </AdminContext.Provider>
-    );
+    return null;
   }
 
   return (
@@ -147,7 +123,7 @@ export default function AdminShell({
                           "inline-flex h-11 min-w-fit items-center gap-3 rounded-2xl px-4 text-sm font-semibold transition-colors",
                           active
                             ? "bg-[var(--interlines-azure)] text-white"
-                            : "bg-transparent text-[var(--interlines-slate-soft)] hover:bg-[var(--interlines-azure-light)] hover:text-[var(--interlines-azure-deep)]",
+                            : "bg-transparent text-[var(--interlines-slate-soft)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--interlines-azure-light)] hover:text-[var(--interlines-azure-deep)]",
                         )}
                       >
                         <Icon className="h-4 w-4" strokeWidth={1.8} />
@@ -171,7 +147,7 @@ export default function AdminShell({
 
                   <Link
                     href="/"
-                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-semibold text-[var(--interlines-slate)] transition-colors hover:bg-slate-50"
+                    className={adminSidebarActionClassName}
                   >
                     <ArrowLeft className="h-4 w-4" strokeWidth={1.8} />
                     Public Site
@@ -190,13 +166,13 @@ export default function AdminShell({
                       <>
                         <Link
                           href="/cruise-search"
-                          className="inline-flex h-10 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-[var(--interlines-slate)] transition-colors hover:bg-slate-50"
+                          className={adminActionClassName}
                         >
                           Cruise Search
                         </Link>
                         <button
                           onClick={onLogout}
-                          className="inline-flex h-10 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-[var(--interlines-slate)] transition-colors hover:bg-slate-50"
+                          className={adminActionClassName}
                         >
                           Log Out
                         </button>
@@ -217,7 +193,7 @@ export default function AdminShell({
                               "inline-flex h-10 items-center rounded-xl px-4 text-sm font-semibold whitespace-nowrap transition-colors",
                               active
                                 ? "bg-[var(--interlines-azure)] text-white"
-                                : "border border-slate-200 bg-white text-[var(--interlines-slate-soft)] hover:bg-slate-50 hover:text-[var(--interlines-slate)]",
+                                : "border border-slate-200 bg-white text-[var(--interlines-slate-soft)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--interlines-azure)]/24 hover:bg-[var(--interlines-azure-light)]/70 hover:text-[var(--interlines-azure-deep)] hover:shadow-[0_12px_24px_rgba(36,88,96,0.1)]",
                             )}
                           >
                             {item.label}

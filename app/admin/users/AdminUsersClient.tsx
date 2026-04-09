@@ -102,6 +102,16 @@ export default function AdminUsersClient() {
     setBusyKey(`${action}-${user.id}`);
 
     try {
+      if (action === "approve") {
+        const confirmed = window.confirm(
+          `Approve ${user.first_name} ${user.last_name} and grant portal access?`,
+        );
+        if (!confirmed) {
+          setBusyKey(null);
+          return;
+        }
+      }
+
       if (action === "delete") {
         const confirmed = window.confirm(
           `Delete ${user.first_name} ${user.last_name} permanently?`,

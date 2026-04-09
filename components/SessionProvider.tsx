@@ -7,7 +7,17 @@ import {
   clearCsrfTokenCache,
   logout,
 } from "@/lib/api";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  readSessionHint,
+  writeSessionHint,
+} from "@/lib/session-hint";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 
 type SessionStatus = "loading" | "guest" | "user" | "admin";
 
@@ -23,6 +33,9 @@ type SessionContextValue = {
 };
 
 const SessionContext = createContext<SessionContextValue | null>(null);
+
+const useIsomorphicLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 function createGuestState() {
   return {
@@ -95,19 +108,34 @@ export default function SessionProvider({
   const [user, setUser] = useState<ApiUser | null>(null);
   const [admin, setAdmin] = useState<ApiAdmin | null>(null);
 
+  function applyResolvedSession(nextSession: {
+    status: Exclude<SessionStatus, "loading">;
+    user: ApiUser | null;
+    admin: ApiAdmin | null;
+  }) {
+    writeSessionHint(nextSession.status);
+    setStatus(nextSession.status);
+    setUser(nextSession.user);
+    setAdmin(nextSession.admin);
+  }
+
   function setGuestSession() {
+    writeSessionHint("guest");
     setStatus("guest");
     setUser(null);
     setAdmin(null);
   }
 
   function setUserSession(nextUser: ApiUser) {
-    setStatus(nextUser.role === "ADMIN" ? "admin" : "user");
+    const nextStatus = nextUser.role === "ADMIN" ? "admin" : "user";
+    writeSessionHint(nextStatus);
+    setStatus(nextStatus);
     setUser(nextUser);
     setAdmin(nextUser.role === "ADMIN" ? createAdminFromUser(nextUser) : null);
   }
 
   function setAdminSession(nextAdmin: ApiAdmin) {
+    writeSessionHint("admin");
     setStatus("admin");
     setUser(null);
     setAdmin(nextAdmin);
@@ -116,9 +144,7 @@ export default function SessionProvider({
   async function refreshSession() {
     setStatus("loading");
     const nextSession = await resolveSession();
-    setStatus(nextSession.status);
-    setUser(nextSession.user);
-    setAdmin(nextSession.admin);
+    applyResolvedSession(nextSession);
   }
 
   async function logoutSession() {
@@ -131,6 +157,16 @@ export default function SessionProvider({
     setGuestSession();
   }
 
+  useIsomorphicLayoutEffect(() => {
+    const hintedStatus = readSessionHint();
+
+    if (!hintedStatus) {
+      return;
+    }
+
+    setStatus(hintedStatus);
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -140,9 +176,7 @@ export default function SessionProvider({
         return;
       }
 
-      setStatus(nextSession.status);
-      setUser(nextSession.user);
-      setAdmin(nextSession.admin);
+      applyResolvedSession(nextSession);
     }
 
     loadSession();

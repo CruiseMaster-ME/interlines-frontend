@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Container from "@/components/Container";
 import Link from "next/link";
 import { Card, Pill } from "@/components/PremiumUI";
+import { buildNoIndexMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Pending Approval - Interline Cruises Middle East",
+export const metadata: Metadata = buildNoIndexMetadata({
+  title: "Pending Approval",
   description: "Your registration is pending verification.",
-};
+});
 
 export default function PendingApprovalPage() {
   return (

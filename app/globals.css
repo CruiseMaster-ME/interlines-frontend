@@ -66,6 +66,35 @@ body:has(.admin-route-marker) {
   -webkit-tap-highlight-color: transparent;
 }
 
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  a[href],
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+    transition-property:
+      color,
+      background-color,
+      border-color,
+      opacity,
+      transform,
+      box-shadow,
+      text-decoration-color;
+    transition-duration: 180ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  a[href]:not([class*="hover:"]):not([class*="group-hover:"]):hover,
+  button:not(:disabled):not([class*="hover:"]):not([class*="group-hover:"]):hover,
+  [role="button"]:not([aria-disabled="true"]):not([class*="hover:"]):not([class*="group-hover:"]):hover {
+    opacity: 0.84;
+  }
+}
+
 img {
   display: block;
 }

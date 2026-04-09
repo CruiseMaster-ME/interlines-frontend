@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import CompactBreadcrumbs from "@/components/CompactBreadcrumbs";
 import Container from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { CheckList, Card, Pill } from "@/components/PremiumUI";
+import StructuredDataScript from "@/components/StructuredDataScript";
+import {
+  buildBreadcrumbStructuredData,
+  buildPageMetadata,
+  buildWebPageStructuredData,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Terms & Conditions - Interline Cruises Middle East",
-  description: "Terms of Use and Booking Conditions for Interline Cruises Middle East.",
-};
+const TERMS_TITLE = "Terms & Conditions";
+const TERMS_DESCRIPTION =
+  "Terms of Use and Booking Conditions for Interline Cruises Middle East.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: TERMS_TITLE,
+  description: TERMS_DESCRIPTION,
+  path: "/terms-and-conditions",
+  image: "/assets/images/cruise-offers.jpg",
+});
 
 function NumberList({ items }: { items: readonly string[] }) {
   return (
@@ -45,31 +58,72 @@ function TermsSection({
 }
 
 export default function TermsPage() {
+  const breadcrumbItems = [
+    { href: "/", label: "Home" },
+    { label: "Terms & Conditions" },
+  ];
+  const breadcrumbStructuredData = buildBreadcrumbStructuredData(
+    [
+      { name: "Home", path: "/" },
+      { name: "Terms & Conditions", path: "/terms-and-conditions/" },
+    ],
+    "/terms-and-conditions/",
+  );
+
   return (
     <div className="bg-[var(--interlines-bg)] min-h-screen pb-24">
+      <StructuredDataScript
+        data={
+          breadcrumbStructuredData
+            ? [
+                buildWebPageStructuredData({
+                  name: TERMS_TITLE,
+                  description: TERMS_DESCRIPTION,
+                  path: "/terms-and-conditions/",
+                  image: "/assets/images/cruise-offers.jpg",
+                }),
+                breadcrumbStructuredData,
+              ]
+            : buildWebPageStructuredData({
+                name: TERMS_TITLE,
+                description: TERMS_DESCRIPTION,
+                path: "/terms-and-conditions/",
+                image: "/assets/images/cruise-offers.jpg",
+              })
+        }
+      />
+
       <PageHeader
         title="Terms of Use & Booking Conditions"
         backgroundImage="/assets/images/cruise-offers.jpg"
         backgroundPosition="center 46%"
-      >
-        <div className="space-y-5">
-          <p>Effective from April 2026</p>
-          <p>
-            Welcome to Interline Cruises Middle East (&quot;ICME,&quot;
-            &quot;we,&quot; &quot;our,&quot; &quot;us&quot;). By accessing or
-            using this website and its services, you agree to comply with these
-            Terms of Use and Booking Conditions. Please read them carefully
-            before registering or making a booking.
+        showBreadcrumbs={false}
+        subHeader={
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/88">
+            Effective from April 2026
           </p>
-          <p>
-            If you do not agree with any part of these terms, you must not use
-            this website.
-          </p>
-        </div>
-      </PageHeader>
+        }
+      />
 
-      <Container className="max-w-4xl px-5 pt-16 sm:pt-20">
+      <Container className="max-w-4xl px-5 pt-10 sm:pt-12">
         <Card className="border border-[var(--interlines-azure)]/5 bg-white/70 p-8 shadow-[0_20px_60px_rgba(48,117,128,0.06)] backdrop-blur-md sm:p-14">
+          <div className="mb-12 border-b border-[var(--interlines-azure)]/10 pb-12">
+            <CompactBreadcrumbs items={breadcrumbItems} />
+            <div className="mt-5 space-y-5 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)]">
+              <p>
+                Welcome to Interline Cruises Middle East (&quot;ICME,&quot;
+                &quot;we,&quot; &quot;our,&quot; &quot;us&quot;). By accessing or
+                using this website and its services, you agree to comply with these
+                Terms of Use and Booking Conditions. Please read them carefully
+                before registering or making a booking.
+              </p>
+              <p>
+                If you do not agree with any part of these terms, you must not use
+                this website.
+              </p>
+            </div>
+          </div>
+
           <TermsSection title="1. Purpose of the Platform">
             <p>
               Interline Cruises Middle East is an online portal created

@@ -1,7 +1,6 @@
 "use client";
 
 import Container from "@/components/Container";
-import MemberSectionNav from "@/components/MemberSectionNav";
 import { apiGet, ApiUser, ensureCsrfToken } from "@/lib/api";
 import { apiUrl } from "@/lib/config";
 import { useRouter } from "next/navigation";
@@ -55,9 +54,7 @@ export default function BookingClient() {
   return (
     <div className="bg-[var(--interlines-bg)] min-h-screen pb-24">
       <Container className="max-w-6xl px-5 pt-10 sm:pt-12">
-        <MemberSectionNav />
-
-        <div className="mt-8 max-w-3xl rounded-[1.75rem] border border-zinc-200 bg-white p-6 shadow-sm sm:p-7">
+        <div className="max-w-3xl rounded-[1.75rem] border border-zinc-200 bg-white p-6 shadow-sm sm:p-7">
           <p className="text-sm leading-7 text-zinc-600">
             When you continue, Interline Cruises Middle East will generate a short-lived
             signed token and post it to the Odysseus booking engine so you arrive already

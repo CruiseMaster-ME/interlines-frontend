@@ -14,7 +14,7 @@ Create `interlines-frontend/.env.local`:
 NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
 
 # Optional (used for SEO metadata base URL)
-NEXT_PUBLIC_SITE_URL=https://abc.com
+NEXT_PUBLIC_SITE_URL=https://interlinecruises-me.com
 ```
 
 `NEXT_PUBLIC_API_BASE_URL` is baked into the static build.

@@ -26,13 +26,24 @@ export default function SiteFooter() {
     <footer className="relative overflow-hidden border-t border-[var(--interlines-azure-deep)] bg-[linear-gradient(180deg,var(--interlines-azure)_0%,var(--interlines-azure-deep)_100%)] pt-16 pb-12 text-white">
       <div className="pointer-events-none absolute left-1/2 bottom-0 h-[300px] w-[500px] -translate-x-1/2 translate-y-1/2 rounded-full bg-white/10 blur-[100px]" />
       <Container className="relative z-10 max-w-6xl px-5">
-        <div className="grid grid-cols-1 gap-12 text-center sm:grid-cols-3 sm:text-left">
-          {footerColumns.map((column) => (
-            <div key={column.title} className="flex flex-col items-center sm:items-start">
+        <div className="grid grid-cols-1 gap-12 text-center sm:grid-cols-3 sm:gap-8">
+          {footerColumns.map((column, index) => (
+            <div
+              key={column.title}
+              className={[
+                "flex w-fit max-w-full flex-col items-center text-center",
+                index === 0
+                  ? "sm:justify-self-start"
+                  : index === footerColumns.length - 1
+                    ? "sm:justify-self-end"
+                    : "sm:justify-self-center",
+                "sm:items-start sm:text-left",
+              ].join(" ")}
+            >
               <p className="mb-6 inline-block border-b border-white/18 pb-3 text-[0.65rem] font-bold uppercase tracking-[0.25em] text-[var(--interlines-gold-light)] sm:text-[0.7rem]">
                 {column.title}
               </p>
-              <div className="space-y-4 text-[0.7rem] tracking-wider text-white/78 sm:text-[13px]">
+              <div className="w-full space-y-4 text-[0.7rem] tracking-wider text-white/78 sm:text-[13px]">
                 {column.links.map((link) => (
                   <div key={link.href}>
                     <Link

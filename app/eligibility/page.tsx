@@ -1,40 +1,82 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import CompactBreadcrumbs from "@/components/CompactBreadcrumbs";
 import Container from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { CheckList, Card, Pill } from "@/components/PremiumUI";
+import StructuredDataScript from "@/components/StructuredDataScript";
+import {
+  buildBreadcrumbStructuredData,
+  buildPageMetadata,
+  buildWebPageStructuredData,
+} from "@/lib/seo";
 import { expandedEligibleProfessions, familyEligibility } from "@/lib/siteContent";
 
 const eligibilityImage = "/assets/images/intro.png";
 const geographicEligibilityImage = "/assets/images/hero-bg.jpg";
+const ELIGIBILITY_TITLE = "Eligibility";
+const ELIGIBILITY_DESCRIPTION =
+  "Find out if you are eligible for exclusive industry only cruise rates.";
 
-export const metadata: Metadata = {
-  title: "Eligibility - Interline Cruises Middle East",
-  description: "Find out if you are eligible for exclusive industry only cruise rates.",
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: ELIGIBILITY_TITLE,
+  description: ELIGIBILITY_DESCRIPTION,
+  path: "/eligibility",
+  image: "/assets/images/intro.png",
+});
 
 export default function EligibilityPage() {
+  const breadcrumbItems = [
+    { href: "/", label: "Home" },
+    { label: "Eligibility" },
+  ];
+  const breadcrumbStructuredData = buildBreadcrumbStructuredData(
+    [
+      { name: "Home", path: "/" },
+      { name: "Eligibility", path: "/eligibility/" },
+    ],
+    "/eligibility/",
+  );
+
   return (
     <div className="bg-[var(--interlines-bg)] min-h-screen">
+      <StructuredDataScript
+        data={
+          breadcrumbStructuredData
+            ? [
+                buildWebPageStructuredData({
+                  name: ELIGIBILITY_TITLE,
+                  description: ELIGIBILITY_DESCRIPTION,
+                  path: "/eligibility/",
+                  image: "/assets/images/intro.png",
+                }),
+                breadcrumbStructuredData,
+              ]
+            : buildWebPageStructuredData({
+                name: ELIGIBILITY_TITLE,
+                description: ELIGIBILITY_DESCRIPTION,
+                path: "/eligibility/",
+                image: "/assets/images/intro.png",
+              })
+        }
+      />
+
       <PageHeader
         title="Who Qualifies for Interline Cruise Discounts"
         backgroundImage="/assets/images/intro.png"
         backgroundPosition="center 42%"
-      >
-        <div className="space-y-4">
-          <p>Find out if you are eligible for exclusive industry only cruise rates.</p>
-          <div>
-            <Pill href="/request-access" variant="white">
-              Register Now
-            </Pill>
-          </div>
-        </div>
-      </PageHeader>
+        showBreadcrumbs={false}
+        className="min-h-[17rem] sm:min-h-[20.5rem] lg:min-h-[24rem]"
+      />
 
       <Container className="px-5 pt-10 pb-20 sm:pt-12 sm:pb-28">
         <section className="mx-auto max-w-4xl rounded-[2.5rem] border border-[var(--interlines-azure)]/10 bg-white p-8 shadow-[0_15px_50px_rgba(48,117,128,0.06)] sm:p-10">
+          <CompactBreadcrumbs items={breadcrumbItems} />
+          <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/78">
+            Find out if you are eligible for exclusive industry only cruise rates.
+          </p>
           <div className="space-y-4 text-[17px] leading-relaxed text-[var(--interlines-slate-soft)]">
-            <p>
+            <p className="mt-6">
               If you work in travel or hospitality, you may already qualify.
               Interline Cruises Middle East is designed for professionals
               employed with Middle East based organisations across aviation,
@@ -42,6 +84,11 @@ export default function EligibilityPage() {
               reserved only for verified members of the travel community
               working within the region.
             </p>
+          </div>
+          <div className="mt-8">
+            <Pill href="/request-access" variant="azure">
+              Register Now
+            </Pill>
           </div>
         </section>
 
