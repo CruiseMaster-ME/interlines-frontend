@@ -28,6 +28,18 @@ const introParagraphs = [
   "All displayed fares already include your interline benefit. Additional promotions may apply where available. New sailings and special rates are added regularly, so there's always something new to inspire your next holiday at sea.",
 ] as const;
 
+const cruiseLineLogoItems = [...cruiseLines]
+  .sort((a, b) =>
+    a.name.localeCompare(b.name, undefined, { sensitivity: "base" }),
+  )
+  .map((line) => ({
+    name: line.name,
+    href: `/cruise-lines/${line.slug}`,
+    logoSrc: line.logoSrc,
+    logoAlt: line.logoAlt,
+    logoClassName: line.logoClassName,
+  }));
+
 export default function CruiseLinesPage() {
   const breadcrumbItems = [
     { href: "/", label: "Home" },
@@ -92,13 +104,7 @@ export default function CruiseLinesPage() {
             <div className="min-w-0 lg:pl-2">
               <div className="rounded-[1.6rem] border border-[var(--interlines-azure)]/10 bg-[linear-gradient(180deg,rgba(248,251,252,0.82)_0%,rgba(255,255,255,0.98)_100%)] p-5 shadow-[0_14px_34px_rgba(48,117,128,0.05)] sm:p-6">
                 <CruiseLineLogoGrid
-                  items={cruiseLines.map((line) => ({
-                    name: line.name,
-                    href: `/cruise-lines/${line.slug}`,
-                    logoSrc: line.logoSrc,
-                    logoAlt: line.logoAlt,
-                    logoClassName: line.logoClassName,
-                  }))}
+                  items={cruiseLineLogoItems}
                   wrapperClassName="mx-0 w-full max-w-none"
                   gridClassName="justify-items-center lg:justify-items-start"
                 />

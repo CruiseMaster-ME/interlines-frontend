@@ -39,6 +39,10 @@ const homeImages = {
   offers: "/assets/images/cruise-offers.jpg",
 } as const;
 
+const homePartnerCruiseLineItems = [...partnerCruiseLines].sort((a, b) =>
+  a.name.localeCompare(b.name, undefined, { sensitivity: "base" }),
+);
+
 import {
   SectionTitle,
   Pill,
@@ -273,7 +277,7 @@ export default function HomePage() {
       <CruiseLineShowcaseSection
         title="Partner Cruise Lines and Offers"
         paragraphs={homePartnerCruiseLinesParagraphs}
-        items={partnerCruiseLines}
+        items={homePartnerCruiseLineItems}
         kicker="Featured cruise lines include:"
         ctaHref="/offers"
         ctaLabel="View Offers"
