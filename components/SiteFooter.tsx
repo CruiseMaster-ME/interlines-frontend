@@ -5,12 +5,15 @@ import { legalNav, primaryNav } from "@/lib/siteContent";
 const footerColumns = [
   {
     title: "Explore",
-    links: primaryNav,
+    links: [
+      ...primaryNav.slice(0, 3),
+      { href: "/offers", label: "Cruise Offers" },
+      ...primaryNav.slice(3),
+    ],
   },
   {
     title: "Member Access",
     links: [
-      { href: "/offers", label: "Cruise Offers" },
       { href: "/login", label: "Log In" },
       { href: "/request-access", label: "Register" },
     ],

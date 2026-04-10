@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { type ReactNode, useId, useState } from "react";
 import { CheckList } from "@/components/PremiumUI";
 import { faqItems } from "@/lib/siteContent";
 import { cn } from "@/lib/ui";
@@ -110,7 +110,11 @@ function AccordionItem({
   );
 }
 
-export default function FaqAccordion() {
+export default function FaqAccordion({
+  topContent,
+}: {
+  topContent?: ReactNode;
+}) {
   const [openIndex, setOpenIndex] = useState<number>(-1);
   const id = useId();
 
@@ -119,19 +123,25 @@ export default function FaqAccordion() {
       <div className="absolute -left-24 top-0 h-56 w-56 rounded-full bg-[var(--interlines-azure)]/8 blur-[90px]" />
       <div className="absolute -right-16 bottom-0 h-48 w-48 rounded-full bg-[var(--interlines-gold)]/10 blur-[80px]" />
 
-      <div className="relative z-10 space-y-4">
-        {faqItems.map((item, index) => (
-          <AccordionItem
-            key={item.question}
-            question={item.question}
-            paragraphs={item.paragraphs}
-            listItems={item.listItems}
-            afterListParagraphs={item.afterListParagraphs}
-            open={openIndex === index}
-            onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
-            panelId={`${id}-panel-${index}`}
-          />
-        ))}
+      <div className="relative z-10">
+        {topContent ? (
+          <div className="px-2 pb-5 pt-1 sm:px-2 sm:pb-6">{topContent}</div>
+        ) : null}
+
+        <div className="space-y-4">
+          {faqItems.map((item, index) => (
+            <AccordionItem
+              key={item.question}
+              question={item.question}
+              paragraphs={item.paragraphs}
+              listItems={item.listItems}
+              afterListParagraphs={item.afterListParagraphs}
+              open={openIndex === index}
+              onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
+              panelId={`${id}-panel-${index}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

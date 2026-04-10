@@ -59,24 +59,22 @@ export default function FaqPage() {
         backgroundPosition="center 34%"
         showBreadcrumbs={false}
         className="min-h-[17rem] sm:min-h-[20.5rem] lg:min-h-[24rem]"
+        subHeader={
+          <div className="flex flex-col items-center gap-4 text-center sm:gap-5">
+            <p className="max-w-2xl text-[15px] leading-7 text-white/92 sm:text-[16px] sm:leading-8">
+              {FAQ_DESCRIPTION}
+            </p>
+            <div>
+              <Pill href="/request-access" variant="white">
+                Register Now
+              </Pill>
+            </div>
+          </div>
+        }
       />
 
       <Container className="max-w-4xl px-5 pt-10 sm:pt-12">
-        <section className="rounded-[2rem] border border-[var(--interlines-azure)]/10 bg-white p-6 shadow-[0_16px_40px_rgba(48,117,128,0.06)] sm:p-8">
-          <CompactBreadcrumbs items={breadcrumbItems} />
-          <p className="mt-4 text-[15px] leading-8 text-[var(--interlines-slate-soft)] sm:text-[16px]">
-            Everything you need to know about accessing exclusive cruise rates.
-          </p>
-          <div className="mt-6">
-            <Pill href="/request-access" variant="azure">
-              Register Now
-            </Pill>
-          </div>
-        </section>
-
-        <div className="mt-8">
-        <FaqAccordion />
-        </div>
+        <FaqAccordion topContent={<CompactBreadcrumbs items={breadcrumbItems} />} />
       </Container>
     </div>
   );

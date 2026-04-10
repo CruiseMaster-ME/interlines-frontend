@@ -67,16 +67,25 @@ export default function EligibilityPage() {
         backgroundPosition="center 42%"
         showBreadcrumbs={false}
         className="min-h-[17rem] sm:min-h-[20.5rem] lg:min-h-[24rem]"
+        subHeader={
+          <div className="flex flex-col items-center gap-4 text-center sm:gap-5">
+            <p className="max-w-2xl text-[15px] leading-7 text-white/92 sm:text-[16px] sm:leading-8">
+              {ELIGIBILITY_DESCRIPTION}
+            </p>
+            <div>
+              <Pill href="/request-access" variant="white">
+                Register Now
+              </Pill>
+            </div>
+          </div>
+        }
       />
 
       <Container className="px-5 pt-10 pb-20 sm:pt-12 sm:pb-28">
-        <section className="mx-auto max-w-4xl rounded-[2.5rem] border border-[var(--interlines-azure)]/10 bg-white p-8 shadow-[0_15px_50px_rgba(48,117,128,0.06)] sm:p-10">
+        <Card className="overflow-hidden sm:p-10">
           <CompactBreadcrumbs items={breadcrumbItems} />
-          <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--interlines-azure)]/78">
-            Find out if you are eligible for exclusive industry only cruise rates.
-          </p>
-          <div className="space-y-4 text-[17px] leading-relaxed text-[var(--interlines-slate-soft)]">
-            <p className="mt-6">
+          <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-[var(--interlines-slate-soft)]">
+            <p>
               If you work in travel or hospitality, you may already qualify.
               Interline Cruises Middle East is designed for professionals
               employed with Middle East based organisations across aviation,
@@ -85,15 +94,8 @@ export default function EligibilityPage() {
               working within the region.
             </p>
           </div>
-          <div className="mt-8">
-            <Pill href="/request-access" variant="azure">
-              Register Now
-            </Pill>
-          </div>
-        </section>
 
-        <Card className="mt-10 overflow-hidden sm:p-10">
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
+          <div className="mt-8 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
             <div className="flex flex-col">
               <h2 className="font-display text-[2rem] leading-tight text-[var(--interlines-slate)]">
                 Who Qualifies for Interline Cruise Discounts
@@ -126,7 +128,7 @@ export default function EligibilityPage() {
             </div>
 
             <div className="border-t border-[var(--interlines-azure)]/10 pt-6 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
-              <h3 className="font-display text-[1.6rem] leading-tight text-[var(--interlines-slate)]">
+              <h3 className="font-display text-[2rem] leading-tight text-[var(--interlines-slate)]">
                 Overview of Eligibility
               </h3>
               <p className="mt-5 text-[15px] leading-relaxed text-[var(--interlines-slate-soft)]">
