@@ -1,4 +1,17 @@
+import Image from "next/image";
 import { cn } from "@/lib/ui";
+
+const WHITE_LOGO = {
+  src: "/assets/logos/logo-white.png",
+  width: 2119,
+  height: 480,
+} as const;
+
+const TEAL_LOGO = {
+  src: "/assets/logos/logo-teal.png",
+  width: 2072,
+  height: 470,
+} as const;
 
 export default function BrandMark({
   inverse = false,
@@ -7,35 +20,23 @@ export default function BrandMark({
   inverse?: boolean;
   showRules?: boolean;
 }) {
-  const topTone = inverse ? "text-white drop-shadow-md" : "text-[var(--interlines-azure)]";
-  const bottomTone = inverse
-    ? "text-[var(--interlines-gold-light)] drop-shadow-sm"
-    : "text-[var(--interlines-slate)]";
-  const accentTone = inverse
-    ? "bg-[var(--interlines-gold-light)]/55"
-    : "bg-[var(--interlines-gold)]/55";
+  const logo = inverse ? WHITE_LOGO : TEAL_LOGO;
+  const ruleTone = inverse
+    ? "to-[color:rgba(223,200,157,0.5)]"
+    : "to-[color:rgba(201,169,110,0.45)]";
 
   const mark = (
-    <span className="inline-flex flex-col items-start text-left leading-none">
-      <span className={cn("mb-1.5 h-px w-6 sm:mb-2 sm:w-8", accentTone)} />
-      <span className="inline-flex flex-col items-start text-left leading-none">
-        <span
-          className={cn(
-            "font-brand text-[0.64rem] font-semibold uppercase tracking-[0.24em] sm:text-[0.9rem] sm:tracking-[0.3em]",
-            topTone,
-          )}
-        >
-          Interline Cruises
-        </span>
-        <span
-          className={cn(
-            "mt-1 text-[0.58rem] font-bold uppercase tracking-[0.22em] sm:mt-1.5 sm:text-[0.78rem] sm:tracking-[0.26em]",
-            bottomTone,
-          )}
-        >
-          Middle East
-        </span>
-      </span>
+    <span className="inline-flex items-center leading-none">
+      <Image
+        src={logo.src}
+        alt="Interline Cruises Middle East"
+        width={logo.width}
+        height={logo.height}
+        className={cn(
+          "h-[2.8rem] w-auto sm:h-[3.15rem] md:h-[3.35rem]",
+          inverse && "drop-shadow-md",
+        )}
+      />
     </span>
   );
 
@@ -45,9 +46,9 @@ export default function BrandMark({
 
   return (
     <div className="flex items-center justify-center gap-4">
-      <span className="h-px w-12 bg-gradient-to-r from-transparent to-[var(--interlines-azure)]/30" />
+      <span className={cn("h-px w-12 bg-gradient-to-r from-transparent", ruleTone)} />
       {mark}
-      <span className="h-px w-12 bg-gradient-to-l from-transparent to-[var(--interlines-azure)]/30" />
+      <span className={cn("h-px w-12 bg-gradient-to-l from-transparent", ruleTone)} />
     </div>
   );
 }

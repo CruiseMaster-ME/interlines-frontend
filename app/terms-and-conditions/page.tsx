@@ -356,7 +356,7 @@ export default function TermsPage() {
               Customer Support - Interline Cruises Middle East
             </p>
             <div className="py-2">
-              <CheckList items={["Email: [Insert Email]", "Telephone: [Insert Number]"]} />
+              <CheckList items={["Email:", "Telephone:"]} />
             </div>
           </TermsSection>
         </Card>

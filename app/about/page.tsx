@@ -134,14 +134,7 @@ export default function AboutPage() {
         <section className="mt-8 overflow-hidden rounded-[2.75rem] bg-[linear-gradient(180deg,var(--interlines-azure)_0%,var(--interlines-azure-deep)_100%)] px-8 py-8 text-white shadow-[0_24px_64px_rgba(36,88,96,0.22)] sm:px-10 sm:py-10 lg:px-12">
           <div className="max-w-5xl">
             <h2 className="font-display text-[1.85rem] leading-[0.98] tracking-[-0.03em] text-white sm:text-[2.35rem] lg:text-[2.7rem]">
-              <a
-                href="https://cruisemaster-me.com"
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors duration-300 hover:text-[var(--interlines-gold-light)]"
-              >
-                Powered by Cruise Master Middle East
-              </a>
+              Powered by Cruise Master Middle East
             </h2>
 
             <div className="mt-6 space-y-4">

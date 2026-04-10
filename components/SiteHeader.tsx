@@ -135,12 +135,12 @@ export default function SiteHeader() {
   const headerSurfaceClassName = usesHeroTone
     ? useInverseTone
       ? "relative h-[4.5rem] md:h-20"
-      : "relative h-[4.5rem] bg-white/85 shadow-[0_10px_32px_rgba(15,23,42,0.08)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/72 md:h-20"
+      : "relative h-[4.5rem] bg-white shadow-[0_10px_32px_rgba(15,23,42,0.08)] md:h-20"
     : usesSolidTealTone
       ? useInverseTone
         ? "relative bg-[linear-gradient(135deg,var(--interlines-azure-deep)_0%,var(--interlines-azure)_100%)] shadow-[0_14px_36px_rgba(26,61,68,0.18)]"
-        : "relative bg-white/85 shadow-[0_10px_32px_rgba(15,23,42,0.08)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/72"
-      : "relative bg-white/85 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-white/70";
+        : "relative bg-white shadow-[0_10px_32px_rgba(15,23,42,0.08)]"
+      : "relative bg-white shadow-sm";
 
   async function onLogout() {
     setIsLoggingOut(true);
@@ -189,7 +189,7 @@ export default function SiteHeader() {
         <Container className={headerGridClassName}>
         <Link
           href="/"
-          className="inline-flex h-full max-w-[10.75rem] items-center justify-self-start leading-none transition-opacity hover:opacity-85 sm:max-w-none"
+          className="inline-flex h-full max-w-[12.75rem] items-center justify-self-start leading-none transition-opacity hover:opacity-85 sm:max-w-none"
         >
           <BrandMark inverse={useInverseTone} />
         </Link>
